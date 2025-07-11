@@ -40,7 +40,7 @@ export const TaskForm: React.FC<ITaskFormProps> = ({ task }) => {
 			...task,
 			title: data.title,
 			progress: data.progress,
-			dueInDays: data.dueDate.getTime(),
+			dueDate: data.dueDate.getTime(),
 			icon: data.icon
 		}
 

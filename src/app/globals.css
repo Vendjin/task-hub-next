@@ -135,9 +135,11 @@
     .bg-block {
         background-color: var(--bg-block);
     }
+
     .bg-counter {
         background-color: var(--bg-counter);
     }
+
     .border-block {
         border-color: var(--border-block);
     }
@@ -145,11 +147,29 @@
     .striped-bg {
         background-image: repeating-linear-gradient(
                 -45deg,
-                rgba(255, 255, 255, 0.3),
-                rgba(255, 255, 255, 0.3) 10px,
-                transparent 10px,
-                transparent 20px
+                rgba(255, 255, 255, 0.25),
+                rgba(255, 255, 255, 0.25) 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
         );
+        background-size: 28px 40px;
+        background-repeat: repeat;
+        background-position: 0 0;
+    }
+}
+
+@layer utilities {
+    @keyframes stripes {
+        from {
+            background-position: 0 0;
+        }
+
+        to {
+            background-position: 28px 0;
+        }
+    }
+    .animate-stripes {
+        animation: stripes 2s linear infinite;
     }
 }
 

@@ -1,3 +1,4 @@
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components'
 import { ICONS } from '@/shared/data'
 import type { ITaskCard } from '@/shared/types'
 import Image from 'next/image'
@@ -9,8 +10,8 @@ interface ILastTaskCardHeaderProps {
 
 export const LastTaskCardHeader: React.FC<ILastTaskCardHeaderProps> = ({ taskCard }) => {
 	const deadLine = useMemo(() => {
-		return Math.ceil((taskCard.dueInDays - Date.now()) / (24 * 60 * 60 * 1000))
-	}, [taskCard.dueInDays])
+		return Math.ceil((taskCard.dueDate - Date.now()) / (24 * 60 * 60 * 1000))
+	}, [taskCard.dueDate])
 
 	return (
 		<div className='flex items-center justify-between'>
@@ -28,14 +29,21 @@ export const LastTaskCardHeader: React.FC<ILastTaskCardHeaderProps> = ({ taskCar
 
 			<div className='flex'>
 				{taskCard.assignees.map((assignee, index) => (
-					<div key={assignee.name} className={`relative ${index !== 0 ? '-ml-3' : ''} z-${index}`}>
-						<Image
-							src={assignee.avatar}
-							alt={assignee.name}
-							width={40}
-							height={40}
-							className='rounded-full border-2 border-white bg-gray-300'
-						/>
+					<div key={assignee.id} className={`relative ${index !== 0 ? '-ml-3' : ''} z-${index}`}>
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Image
+									src={assignee.avatarPath}
+									alt={assignee.name}
+									width={40}
+									height={40}
+									className='rounded-full border-2 border-white bg-gray-300'
+								/>
+							</TooltipTrigger>
+							<TooltipContent>
+								<p>{assignee.name}</p>
+							</TooltipContent>
+						</Tooltip>
 					</div>
 				))}
 			</div>

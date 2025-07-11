@@ -1,18 +1,25 @@
 import React from 'react'
 
 export interface IAssignee {
+	id: string
 	name: string
-	avatar: string
+	avatarPath: string
+}
+
+export interface ISubtask {
+	id: string
+	title: string
+	isComplete: boolean
 }
 
 export interface ITaskCard {
 	id: number
 	title: string
-	dueInDays: number
-	progress: number
-	comments: number
-	attachments: number
-	links: number
+	dueDate: number
+	subTasks: ISubtask[]
+	comments: string[]
+	attachments: string[]
+	links: string[]
 	assignees: IAssignee[]
 	icon: string
 }

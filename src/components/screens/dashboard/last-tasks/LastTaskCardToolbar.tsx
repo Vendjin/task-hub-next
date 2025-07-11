@@ -1,7 +1,7 @@
-import React from 'react'
 import type { ITaskCard } from '@/shared/types'
 import { Image as ImageIcon, Link as LinkIcon, MessageSquareText, Pencil, Plus } from 'lucide-react'
 import Link from 'next/link'
+import React from 'react'
 
 interface ILastTaskCardToolbarProps {
 	taskCard: ITaskCard
@@ -10,32 +10,32 @@ interface ILastTaskCardToolbarProps {
 export const LastTaskCardToolbar: React.FC<ILastTaskCardToolbarProps> = ({ taskCard }) => {
 	return (
 		<div className='flex items-center justify-between'>
-			<div className='flex items-center justify-between gap-4 text-sm '>
+			<div className='flex items-center justify-between gap-4 text-sm'>
 				<div className='flex items-center gap-1'>
-					<MessageSquareText className='text-neutral-400 w-5 h-5' />
-					<span>{taskCard.comments}</span>
+					<MessageSquareText className='h-5 w-5 text-neutral-400' />
+					<span>{taskCard.comments.length}</span>
 				</div>
 
 				<div className='flex items-center gap-1'>
-					<ImageIcon className='text-neutral-400 w-5 h-5' />
-					<span>{taskCard.attachments}</span>
+					<ImageIcon className='h-5 w-5 text-neutral-400' />
+					<span>{taskCard.attachments.length}</span>
 				</div>
 
 				<div className='flex items-center gap-1'>
-					<LinkIcon className='text-neutral-400 w-4.5 h-4.5' />
-					<span>{taskCard.links}</span>
+					<LinkIcon className='h-4.5 w-4.5 text-neutral-400' />
+					<span>{taskCard.links.length}</span>
 				</div>
 			</div>
 
 			<div className='flex items-center gap-2'>
-				<button className='w-8 h-8 flex items-center justify-center bg-primary-active border border-primary-active rounded-full cursor-pointer'>
-					<Plus className='w-4 h-4' />
+				<button className='bg-primary-active border-primary-active flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border'>
+					<Plus className='h-4 w-4' />
 				</button>
 				<Link
 					href={`/task/${taskCard.id}`}
-					className='inline-flex w-8 h-8 items-center justify-center border border-primary rounded-full text-neutral-400 hover:text-primary transition-colors'
+					className='border-primary hover:text-primary inline-flex h-8 w-8 items-center justify-center rounded-full border text-neutral-400 transition-colors'
 				>
-					<Pencil className='w-4 h-4' />
+					<Pencil className='h-4 w-4' />
 				</Link>
 			</div>
 		</div>

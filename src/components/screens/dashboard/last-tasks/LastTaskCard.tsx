@@ -13,7 +13,7 @@ export const LastTaskCard: React.FC<ILastTaskCardProps> = ({ taskCard }) => {
 	return (
 		<div className='bg-block flex flex-col gap-2 overflow-auto rounded-2xl p-3'>
 			<LastTaskCardHeader taskCard={taskCard} />
-			<LastTaskCardProgressBar progress={taskCard.progress} />
+			<LastTaskCardProgressBar subTasks={taskCard.subTasks} />
 			<LastTaskCardToolbar taskCard={taskCard} />
 		</div>
 	)

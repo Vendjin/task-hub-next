@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react'
+import { getTaskProgressService } from '@/services'
 import type { ITaskCard, TProgressFilter, TSortedTasks } from '@/shared/types'
+import { useMemo, useState } from 'react'
 
 interface ITasksFilterSortOptions {
 	tasks: ITaskCard[]
@@ -9,25 +10,34 @@ interface ITasksFilterSortOptions {
 export const useTasksFilterSort = ({ tasks, filter }: ITasksFilterSortOptions) => {
 	const [sortOrder, setSortOrder] = useState<TSortedTasks>('none')
 
+	const tasksWithProgress = useMemo(
+		() =>
+			tasks.map(task => ({
+				...task,
+				progress: getTaskProgressService(task.subTasks)
+			})),
+		[tasks]
+	)
+
 	const filteredTasks = useMemo(() => {
 		switch (filter) {
 			case 'not_started':
-				return tasks.filter(task => task.progress === 0)
+				return tasksWithProgress.filter(task => task.progress === 0)
 			case 'in_progress':
-				return tasks.filter(task => task.progress > 0 && task.progress < 100)
+				return tasksWithProgress.filter(task => task.progress > 0 && task.progress < 100)
 			case 'done':
-				return tasks.filter(task => task.progress === 100)
+				return tasksWithProgress.filter(task => task.progress === 100)
 			case 'all':
 			default:
-				return tasks
+				return tasksWithProgress
 		}
-	}, [filter, tasks])
+	}, [filter, tasksWithProgress])
 
 	const countersTasks = useMemo(() => {
 		const allTasks = tasks.length
-		const notStarted = tasks.filter(task => task.progress <= 0).length
-		const inProgress = tasks.filter(task => task.progress > 0 && task.progress < 100).length
-		const done = tasks.filter(task => task.progress === 100).length
+		const notStarted = tasksWithProgress.filter(task => task.progress <= 0).length
+		const inProgress = tasksWithProgress.filter(task => task.progress > 0 && task.progress < 100).length
+		const done = tasksWithProgress.filter(task => task.progress === 100).length
 
 		return {
 			all: allTasks,
@@ -35,13 +45,11 @@ export const useTasksFilterSort = ({ tasks, filter }: ITasksFilterSortOptions) =
 			in_progress: inProgress,
 			done: done
 		}
-	}, [tasks])
+	}, [tasksWithProgress, tasks])
 
 	const sortedTasks = useMemo(() => {
 		if (sortOrder === 'none') return filteredTasks
-		return [...filteredTasks].sort((a, b) =>
-			sortOrder === 'asc' ? a.dueInDays - b.dueInDays : b.dueInDays - a.dueInDays
-		)
+		return [...filteredTasks].sort((a, b) => (sortOrder === 'asc' ? a.dueDate - b.dueDate : b.dueDate - a.dueDate))
 	}, [filteredTasks, sortOrder])
 
 	const toggleSortOrder = () => {

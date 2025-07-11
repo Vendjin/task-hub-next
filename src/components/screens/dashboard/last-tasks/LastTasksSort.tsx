@@ -9,7 +9,7 @@ interface ILastTasksSortProps {
 
 export const LastTasksSort: React.FC<ILastTasksSortProps> = ({ order, toggleOrder }) => {
 	return (
-		<div className='item-center bg-block border-primary flex rounded-lg p-1'>
+		<div className='item-center bg-block flex rounded-lg border p-1'>
 			<button
 				onClick={toggleOrder}
 				aria-label='Сортировка по дедлайну'
