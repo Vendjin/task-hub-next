@@ -1,7 +1,6 @@
 'use client'
 
 import { useTasksFilterSort } from '@/hooks'
-import { LAST_TASKS_DATA } from '@/shared/data'
 import type { TProgressFilter } from '@/shared/types'
 import { useTasksStore } from '@/store'
 import React, { useState } from 'react'

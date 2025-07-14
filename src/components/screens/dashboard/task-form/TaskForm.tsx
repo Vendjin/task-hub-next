@@ -46,7 +46,7 @@ export const TaskForm: React.FC<ITaskFormProps> = ({ taskId }) => {
 			draftTask.icon = data.icon
 		})
 
-		toast('Успешно обновлено', {
+		toast('Update completed', {
 			description: 'Данные формы успешно обновлены',
 			id: 'addTask',
 			action: {
