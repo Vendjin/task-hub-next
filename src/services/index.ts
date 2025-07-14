@@ -1,1 +1,1 @@
-export { getTaskProgressService } from './getTaskProgress.services'
+export { getTaskProgressService } from './getTaskProgress.service'

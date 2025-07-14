@@ -21,7 +21,7 @@ export const LastTaskCardProgressBar: React.FC<ILastTaskProgressBarProps> = ({ s
 		<div className='h-10 w-full rounded-full bg-violet-100 dark:bg-violet-200'>
 			<div
 				className={cn(
-					'striped-bg animate-stripes relative h-full cursor-default rounded-full',
+					'striped-bg animate-stripes relative h-full cursor-default rounded-full transition-all duration-300',
 					getColor(progress)
 				)}
 				style={{ width: `${progress}%` }}

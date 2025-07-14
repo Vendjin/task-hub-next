@@ -3,6 +3,7 @@
 import { useTasksFilterSort } from '@/hooks'
 import { LAST_TASKS_DATA } from '@/shared/data'
 import type { TProgressFilter } from '@/shared/types'
+import { useTasksStore } from '@/store'
 import React, { useState } from 'react'
 
 import { LastTaskCard } from '@/components/screens/dashboard/last-tasks/LastTaskCard'
@@ -14,9 +15,10 @@ interface ILastTasksProps {
 
 export const LastTasks: React.FC<ILastTasksProps> = () => {
 	const [filter, setFilter] = useState<TProgressFilter>('all')
+	const lastTasks = useTasksStore(state => state.tasks)
 
 	const { sortOrder, sortedTasks, countersTasks, toggleSortOrder } = useTasksFilterSort({
-		tasks: LAST_TASKS_DATA,
+		tasks: lastTasks ?? [],
 		filter
 	})
 

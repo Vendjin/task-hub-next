@@ -1,3 +1,4 @@
+import { Toaster } from '@/components'
 import React from 'react'
 
 import { Sidebar } from '@/components/ui/sidebar-menu'
@@ -10,12 +11,13 @@ export default function Layout({
 	modal: React.ReactNode
 }>) {
 	return (
-		<div className='grid h-screen grid-cols-[270px_1fr]'>
+		<div className='grid h-screen grid-cols-[260px_1fr]'>
 			<Sidebar />
 			<main>
 				{children}
 				{modal}
 			</main>
+			<Toaster />
 		</div>
 	)
 }
