@@ -179,6 +179,7 @@ html {
 
 html, body {
     font-family: var(--font-sans), sans-serif;
+    height: 100%;
 }
 
 body {

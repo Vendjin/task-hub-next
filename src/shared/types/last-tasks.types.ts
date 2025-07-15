@@ -15,6 +15,7 @@ export interface ISubtask {
 export interface ITaskCard {
 	id: number
 	title: string
+	color?: 'bg-slate-400' | 'bg-violet-300' | 'bg-stone-300'
 	dueDate: {
 		date: Date
 		startTime?: Date

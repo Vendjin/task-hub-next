@@ -18,10 +18,11 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 	{
 		id: 1,
 		title: 'Travel App User Flow',
+		color: 'bg-violet-300',
 		dueDate: {
-			date: new Date(now + day),
-			startTime: setMinutes(setHours(new Date(), 10), 0),
-			endTime: setMinutes(setHours(new Date(), 13), 30)
+			date: new Date(),
+			startTime: setMinutes(setHours(new Date(), 9), 20),
+			endTime: setMinutes(setHours(new Date(), 12), 30)
 		},
 		comments: ['This is a first comment', 'Second comment', 'Thread comment'],
 		attachments: ['', '', '', '', '', '', ''],
@@ -36,10 +37,11 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 	{
 		id: 2,
 		title: 'E-commerce Checkout Design',
+		color: 'bg-slate-400',
 		dueDate: {
-			date: new Date(now + day),
-			startTime: setMinutes(setHours(new Date(), 13), 0),
-			endTime: setMinutes(setHours(new Date(), 15), 30)
+			date: new Date(),
+			startTime: setMinutes(setHours(new Date(), 12), 50),
+			endTime: setMinutes(setHours(new Date(), 15), 40)
 		},
 		comments: ['Some comment 1', 'Another comment', 'More feedback', 'One more', 'Final note'],
 		attachments: ['', ''],

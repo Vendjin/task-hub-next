@@ -1,6 +1,6 @@
 import { LAST_TASKS_DATA } from '@/shared/data'
 import type { ISubtask, ITaskCard } from '@/shared/types'
-import { isToday, isTomorrow } from 'date-fns'
+import { isToday } from 'date-fns'
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand/react'
 
@@ -20,7 +20,7 @@ export const useTasksStore = create<ITasksStore>()(
 		getTodayTasks: () => {
 			return get().tasks?.filter(task => {
 				const dueDate = new Date(task.dueDate.date)
-				return isToday(dueDate) || isTomorrow(dueDate)
+				return isToday(dueDate)
 			})
 		},
 		setTasks: tasks => set({ tasks }),

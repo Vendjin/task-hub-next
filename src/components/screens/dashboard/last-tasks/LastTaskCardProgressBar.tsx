@@ -15,6 +15,7 @@ export const LastTaskCardProgressBar: React.FC<ILastTaskProgressBarProps> = ({ s
 		if (value === 100) return 'bg-teal-400'
 		if (value <= 53) return 'bg-primary-active'
 		if (value > 53) return 'bg-yellow-500'
+		if (value === 0) return 'bg-teal-400'
 	}
 
 	return (
