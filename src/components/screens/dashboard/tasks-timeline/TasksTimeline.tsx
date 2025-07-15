@@ -11,8 +11,6 @@ interface ITasksTimelineProps {
 	title?: string
 }
 
-// const HOURS = Array.from({ length: 9 }, (_, i) => i + 1)
-
 export const TasksTimeline: React.FC<ITasksTimelineProps> = () => {
 	const getTodayTasks = useTasksStore(state => state.getTodayTasks)
 	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks])
@@ -33,12 +31,7 @@ export const TasksTimeline: React.FC<ITasksTimelineProps> = () => {
 
 					const startPercent = (((start - 9) * 60 + startMinutes) / ((17 - 9) * 60)) * 100
 					const endPercent = (((end - 9) * 60 + endMinutes) / ((17 - 9) * 60)) * 100
-
 					const widthPercent = endPercent - startPercent
-
-					// const icon = ICONS[task.icon].value
-
-					console.log(startPercent, endPercent, widthPercent)
 
 					return (
 						<div

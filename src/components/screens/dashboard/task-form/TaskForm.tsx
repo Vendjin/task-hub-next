@@ -2,7 +2,6 @@
 
 import type { ITaskCard, ITaskFormValues } from '@/shared/types'
 import { useTasksStore } from '@/store'
-import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -11,7 +10,7 @@ import { toast } from 'sonner'
 import { DeadLineInput } from '@/components/screens/dashboard/task-form/DeadLineInput'
 import { IconSelector } from '@/components/screens/dashboard/task-form/IconSelector'
 import { TitleInput } from '@/components/screens/dashboard/task-form/TitleInput'
-import { Button, Form } from '@/components/ui'
+import { Form, SubmitButton } from '@/components/ui'
 
 import { useSetDefaultValuesTaskForm } from '@/hooks/useSetDefaultValues'
 
@@ -65,16 +64,7 @@ export const TaskForm: React.FC<ITaskFormProps> = ({ taskId }) => {
 				<DeadLineInput />
 				<IconSelector />
 
-				<Button type='submit' className='w-full' disabled={loading}>
-					{loading ? (
-						<>
-							<Loader2 className='mr-2 h-4 w-4 animate-spin' />
-							Please wait
-						</>
-					) : (
-						'Save changes'
-					)}
-				</Button>
+				<SubmitButton loading={loading} title='Save changes' />
 			</form>
 		</Form>
 	)
