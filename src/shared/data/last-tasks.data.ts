@@ -1,6 +1,7 @@
 import type { IAssignee, ITaskCard } from '@/shared/types'
+import { setHours, setMinutes } from 'date-fns'
 
-const now = Date.now()
+const now = new Date().getTime()
 const day = 24 * 60 * 60 * 1000
 
 export const USERS: IAssignee[] = [
@@ -17,7 +18,11 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 	{
 		id: 1,
 		title: 'Travel App User Flow',
-		dueDate: now + 5 * day,
+		dueDate: {
+			date: new Date(now + day),
+			startTime: setMinutes(setHours(new Date(), 10), 0),
+			endTime: setMinutes(setHours(new Date(), 13), 30)
+		},
 		comments: ['This is a first comment', 'Second comment', 'Thread comment'],
 		attachments: ['', '', '', '', '', '', ''],
 		links: ['https://links1.example.com', 'https://links2.example.com'],
@@ -31,11 +36,15 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 	{
 		id: 2,
 		title: 'E-commerce Checkout Design',
-		dueDate: now + 3 * day,
+		dueDate: {
+			date: new Date(now + day),
+			startTime: setMinutes(setHours(new Date(), 13), 0),
+			endTime: setMinutes(setHours(new Date(), 15), 30)
+		},
 		comments: ['Some comment 1', 'Another comment', 'More feedback', 'One more', 'Final note'],
 		attachments: ['', ''],
 		links: ['https://checkout.example.com'],
-		assignees: [USERS[0], USERS[1]],
+		assignees: [USERS[2], USERS[3]],
 		icon: 'shopping',
 		subTasks: [
 			{ id: '1', title: 'Design payment form', isComplete: true },
@@ -48,7 +57,9 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 	{
 		id: 3,
 		title: 'Onboarding Walkthrough',
-		dueDate: now + 7 * day,
+		dueDate: {
+			date: new Date(now + 3 * day)
+		},
 		comments: ['Just one comment'],
 		attachments: ['', '', '', ''],
 		links: ['https://onboarding.example.com', 'https://walkthrough.example.com', 'https://demo.example.com'],
@@ -65,7 +76,9 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 	{
 		id: 4,
 		title: 'Marketing Campaign Plan',
-		dueDate: now + 10 * day,
+		dueDate: {
+			date: new Date(now + 7 * day)
+		},
 		comments: ['Idea #1', 'Idea #2', 'Ad concept', 'Budget discussion'],
 		attachments: ['', '', ''],
 		links: [],
@@ -82,7 +95,9 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 	{
 		id: 5,
 		title: 'Bug Fixes Sprint',
-		dueDate: now + 2 * day,
+		dueDate: {
+			date: new Date(now + 2 * day)
+		},
 		comments: ['Crash bug', 'Login bug', 'Minor UI issue', 'Backend timeout', 'CSS glitch', 'API error'],
 		attachments: ['', '', '', '', ''],
 		links: ['https://bugtracker.example.com', 'https://jira.example.com'],
@@ -99,7 +114,9 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 	{
 		id: 6,
 		title: 'New Feature Proposal',
-		dueDate: now + 8 * day,
+		dueDate: {
+			date: new Date(now + 8 * day)
+		},
 		comments: [],
 		attachments: [''],
 		links: ['https://feature-docs.example.com'],
@@ -111,31 +128,6 @@ export const LAST_TASKS_DATA: ITaskCard[] = [
 			{ id: '3', title: 'Revise draft', isComplete: false },
 			{ id: '4', title: 'Present to team', isComplete: false },
 			{ id: '5', title: 'Finalize scope', isComplete: false }
-		]
-	},
-	{
-		id: 7,
-		title: 'User Feedback Analysis',
-		dueDate: now + 4 * day,
-		comments: [
-			'Too many clicks',
-			'Love the UI!',
-			'Add dark mode',
-			'Fix mobile issues',
-			'Improve onboarding',
-			'More filters',
-			'Works great overall'
-		],
-		attachments: ['', ''],
-		links: ['https://feedback1.example.com', 'https://feedback2.example.com'],
-		assignees: [USERS[6], USERS[2], USERS[1]],
-		icon: 'feedback',
-		subTasks: [
-			{ id: '1', title: 'Collect survey data', isComplete: true },
-			{ id: '2', title: 'Group common issues', isComplete: true },
-			{ id: '3', title: 'Prioritize top concerns', isComplete: true },
-			{ id: '4', title: 'Document improvement plan', isComplete: false },
-			{ id: '5', title: 'Send summary to stakeholders', isComplete: false }
 		]
 	}
 ]

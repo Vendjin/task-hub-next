@@ -11,13 +11,13 @@ export default function Layout({
 	modal: React.ReactNode
 }>) {
 	return (
-		<div className='grid h-screen grid-cols-[260px_1fr]'>
-			<Sidebar />
-			<main>
-				{children}
+		<>
+			<div className='grid h-screen grid-cols-[260px_1fr]'>
+				<Sidebar />
+				<main>{children}</main>
 				{modal}
-			</main>
+			</div>
 			<Toaster />
-		</div>
+		</>
 	)
 }

@@ -10,8 +10,8 @@ interface ILastTaskCardHeaderProps {
 
 export const LastTaskCardHeader: React.FC<ILastTaskCardHeaderProps> = ({ taskCard }) => {
 	const deadLine = useMemo(() => {
-		return Math.ceil((taskCard.dueDate - Date.now()) / (24 * 60 * 60 * 1000))
-	}, [taskCard.dueDate])
+		return Math.ceil((taskCard.dueDate.date.getTime() - Date.now()) / (24 * 60 * 60 * 1000))
+	}, [taskCard.dueDate.date])
 
 	return (
 		<div className='flex items-center justify-between'>

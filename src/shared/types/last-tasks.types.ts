@@ -15,7 +15,11 @@ export interface ISubtask {
 export interface ITaskCard {
 	id: number
 	title: string
-	dueDate: number
+	dueDate: {
+		date: Date
+		startTime?: Date
+		endTime?: Date
+	}
 	subTasks: ISubtask[]
 	comments: string[]
 	attachments: string[]

@@ -42,7 +42,7 @@ export const TaskForm: React.FC<ITaskFormProps> = ({ taskId }) => {
 
 		taskUpdate(task.id, draftTask => {
 			draftTask.title = data.title
-			draftTask.dueDate = data.dueDate.getTime()
+			draftTask.dueDate.date = data.dueDate
 			draftTask.icon = data.icon
 		})
 

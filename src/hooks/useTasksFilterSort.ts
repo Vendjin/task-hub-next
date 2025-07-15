@@ -49,7 +49,11 @@ export const useTasksFilterSort = ({ tasks, filter }: ITasksFilterSortOptions) =
 
 	const sortedTasks = useMemo(() => {
 		if (sortOrder === 'none') return filteredTasks
-		return [...filteredTasks].sort((a, b) => (sortOrder === 'asc' ? a.dueDate - b.dueDate : b.dueDate - a.dueDate))
+		return [...filteredTasks].sort((a, b) => {
+			const timeA = a.dueDate.date.getTime()
+			const timeB = b.dueDate.date.getTime()
+			return sortOrder === 'asc' ? timeA - timeB : timeB - timeA
+		})
 	}, [filteredTasks, sortOrder])
 
 	const toggleSortOrder = () => {
