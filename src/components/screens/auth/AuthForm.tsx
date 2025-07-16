@@ -50,8 +50,8 @@ export const AuthForm: React.FC<IAuthFormProps> = ({ type }) => {
 	}
 
 	return (
-		<div className='flex h-full w-full items-center justify-center shadow-md'>
-			<div className='w-full max-w-lg rounded-lg bg-white p-6 dark:bg-neutral-800'>
+		<div className='to-a flex h-full w-full items-center justify-center bg-gradient-to-tr from-violet-400 to-amber-400 shadow-md'>
+			<div className='bg-block w-full max-w-lg rounded-lg p-6 dark:bg-neutral-800'>
 				<Form {...methods}>
 					<form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
 						<h1 className='text-center text-xl font-bold'>{isLogin ? 'Login Task Hub' : 'Register'}</h1>

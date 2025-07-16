@@ -15,12 +15,12 @@ export const TasksTimeline: React.FC<ITasksTimelineProps> = () => {
 	const getTodayTasks = useTasksStore(state => state.getTodayTasks)
 	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks])
 
-	const users = [...new Set(todayTasks?.map(task => task.assignees).flat())]
+	const users = [...new Map(todayTasks?.flatMap(task => task.assignees).map(user => [user.id, user])).values()]
 
 	return (
 		<div className='bg-block rounded-xl p-5'>
 			<TimeLineHeader users={users} />
-			<div className='relative h-50'>
+			<div className='relative h-75'>
 				{todayTasks?.map(task => {
 					const start = getHours(task.dueDate.startTime ?? task.dueDate.date)
 					const end = getHours(task.dueDate.endTime ?? task.dueDate.date)

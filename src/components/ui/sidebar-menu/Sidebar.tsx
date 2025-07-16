@@ -17,7 +17,7 @@ export const Sidebar: React.FC<ISidebarProps> = () => {
 	const isLoggedIn = useAuthStore(state => state.isLoggedIn)
 
 	return (
-		<aside className='w-full bg-white p-5 pt-10 dark:bg-neutral-800'>
+		<aside className='bg-block w-full p-5 pt-10 dark:bg-neutral-800'>
 			{isLoggedIn && (
 				<>
 					<SideBarDivider title='Account' />

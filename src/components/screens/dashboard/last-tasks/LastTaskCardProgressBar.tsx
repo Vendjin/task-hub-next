@@ -12,14 +12,14 @@ export const LastTaskCardProgressBar: React.FC<ILastTaskProgressBarProps> = ({ s
 	const progress = getTaskProgressService(subTasks)
 
 	const getColor = (value: number) => {
-		if (value === 100) return 'bg-teal-400'
-		if (value <= 53) return 'bg-primary-active'
-		if (value > 53) return 'bg-yellow-500'
-		if (value === 0) return 'bg-teal-400'
+		if (value === 100) return 'bg-teal-400 dark:bg-teal-400/80'
+		if (value <= 53) return 'bg-primary-active dark:bg-primary-active/80'
+		if (value > 53) return 'bg-yellow-500 dark:bg-yellow-500/80'
+		if (value === 0) return 'bg-teal-400 dark:bg-teal-400/80'
 	}
 
 	return (
-		<div className='h-10 w-full rounded-full bg-violet-100 dark:bg-violet-200'>
+		<div className='h-10 w-full rounded-full bg-violet-100 dark:bg-violet-200/90'>
 			<div
 				className={cn(
 					'striped-bg animate-stripes relative h-full cursor-default rounded-full transition-all duration-300',

@@ -51,9 +51,9 @@ export const LastTasks: React.FC<ILastTasksProps> = () => {
 						))}
 					</CarouselContent>
 
-					<CarouselPrevious className='absolute top-1/2 left-1 z-10 -translate-y-1/2 rounded-full bg-white/60 shadow-md backdrop-blur-xs transition hover:scale-105 hover:bg-white dark:backdrop-blur-md' />
+					<CarouselPrevious className='bg-block/60 hover:bg-block absolute top-1/2 left-1 z-10 -translate-y-1/2 rounded-full shadow-md backdrop-blur-xs transition hover:scale-105 dark:backdrop-blur-md' />
 
-					<CarouselNext className='absolute top-1/2 right-1 z-10 -translate-y-1/2 rounded-full bg-white/40 shadow-md backdrop-blur-xs transition hover:scale-105 hover:bg-white dark:backdrop-blur-md' />
+					<CarouselNext className='bg-block/40 hover:bg-block absolute top-1/2 right-1 z-10 -translate-y-1/2 rounded-full shadow-md backdrop-blur-xs transition hover:scale-105 dark:backdrop-blur-md' />
 				</Carousel>
 			) : (
 				<div className='flex justify-center text-2xl font-bold text-neutral-400'>Not available tasks</div>
