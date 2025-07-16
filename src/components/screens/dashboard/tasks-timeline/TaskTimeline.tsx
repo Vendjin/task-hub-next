@@ -34,7 +34,11 @@ export const TaskTimeline: React.FC<ITaskTimelineProps> = ({ task }) => {
 
 			<div className='mt-3 flex'>
 				{task.assignees.map((assignee, index) => (
-					<div key={assignee.id} className={`relative ${index !== 0 ? '-ml-3' : ''} z-${index}`}>
+					<div
+						key={assignee.id}
+						className={cn('relative', index !== 0 && '-ml-3')}
+						style={{ zIndex: 10 - index }}
+					>
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Image

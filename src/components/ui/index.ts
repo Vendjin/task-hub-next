@@ -15,3 +15,12 @@ export { TooltipTrigger, TooltipContent, TooltipProvider, Tooltip } from './Tool
 export { Toaster } from './Sonner'
 export { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './Carousel'
 export { SubmitButton } from './SubmitButton'
+export {
+	DropdownMenu,
+	DropdownMenuTrigger,
+	DropdownMenuContent,
+	DropdownMenuLabel,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuShortcut
+} from './DropdownMenu'

@@ -1,8 +1,10 @@
 'use client'
 
 import { Form, SubmitButton } from '@/components'
-import { PAGES } from '@/config'
+import { DASHBOARD_PAGES } from '@/config'
+import { TokenService, token } from '@/services'
 import type { IAuthForm } from '@/shared/types'
+import { useAuthStore } from '@/store'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -21,6 +23,8 @@ export const AuthForm: React.FC<IAuthFormProps> = ({ type }) => {
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
 
+	const login = useAuthStore(state => state.login)
+
 	const methods = useForm<IAuthForm>({
 		defaultValues: {
 			login: '',
@@ -31,16 +35,18 @@ export const AuthForm: React.FC<IAuthFormProps> = ({ type }) => {
 
 	const onSubmit = async (data: IAuthForm) => {
 		setLoading(true)
-		console.log(data)
-
-		toast.success(isLogin ? 'Login successful' : 'Register successfully.', {
-			id: isLogin ? 'login' : 'register'
-		})
-
-		setLoading(false)
-
+		login(data.login, 'someToken')
 		reset()
-		router.replace(PAGES.DASHBOARD)
+
+		const isLoginIn = !!TokenService.get(token.accessToken)
+
+		if (isLoginIn) {
+			setLoading(false)
+			router.replace(DASHBOARD_PAGES.DASHBOARD)
+			toast.success(isLogin ? 'Login successful' : 'Register successfully.', {
+				id: isLogin ? 'login' : 'register'
+			})
+		}
 	}
 
 	return (

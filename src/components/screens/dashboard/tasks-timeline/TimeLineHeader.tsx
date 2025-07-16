@@ -1,5 +1,6 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components'
 import type { IAssignee } from '@/shared/types'
+import { cn } from '@/utils'
 import Image from 'next/image'
 import React from 'react'
 
@@ -16,7 +17,11 @@ export const TimeLineHeader: React.FC<ITimeLineHeaderProps> = ({ users }) => {
 				<h2 className='text-xl font-medium'>Today tasks</h2>
 				<div className='item-center flex'>
 					{users.slice(0, 3).map((user, index) => (
-						<div key={user.id} className={`relative ${index !== 0 ? '-ml-3' : ''} z-[${10 - index}]`}>
+						<div
+							key={user.id}
+							className={cn('relative', index !== 0 && '-ml-3')}
+							style={{ zIndex: 10 - index }}
+						>
 							<Tooltip>
 								<TooltipTrigger asChild>
 									<Image

@@ -14,7 +14,6 @@ interface ITasksTimelineProps {
 export const TasksTimeline: React.FC<ITasksTimelineProps> = () => {
 	const getTodayTasks = useTasksStore(state => state.getTodayTasks)
 	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks])
-	console.log(todayTasks)
 
 	const users = [...new Set(todayTasks?.map(task => task.assignees).flat())]
 

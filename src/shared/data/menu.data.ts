@@ -1,3 +1,4 @@
+import { DASHBOARD_PAGES } from '@/config'
 import type { IMenuItem } from '@/shared/types'
 import {
 	CalendarDays,
@@ -8,42 +9,41 @@ import {
 	Settings,
 	UsersRound
 } from 'lucide-react'
-import { PAGES } from '@/config'
 
 export const MENU: IMenuItem[] = [
 	{
 		icon: LayoutGrid,
 		label: 'Dashboard',
-		href: PAGES.DASHBOARD
+		href: DASHBOARD_PAGES.DASHBOARD
 	},
 	{
 		icon: MessageCircleMore,
 		label: 'Message',
-		href: PAGES.MESSAGE
+		href: DASHBOARD_PAGES.MESSAGE
 	},
 	{
 		icon: ChartNoAxesColumn,
 		label: 'Insight',
-		href: PAGES.INSIGHT
+		href: DASHBOARD_PAGES.INSIGHT
 	},
 	{
 		icon: UsersRound,
 		label: 'Team',
-		href: PAGES.TEAM
+		href: DASHBOARD_PAGES.TEAM
 	},
 	{
 		icon: CalendarDays,
 		label: 'Schedule',
-		href: PAGES.SCHEDULE
+		href: DASHBOARD_PAGES.SCHEDULE
 	},
 	{
 		icon: Notebook,
 		label: 'Report',
-		href: PAGES.REPORT
+		href: DASHBOARD_PAGES.REPORT
 	},
 	{
 		icon: Settings,
 		label: 'Settings',
-		href: PAGES.SETTINGS
+		href: DASHBOARD_PAGES.SETTINGS
 	}
 ]
