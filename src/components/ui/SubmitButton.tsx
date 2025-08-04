@@ -16,7 +16,7 @@ export const SubmitButton: React.FC<ISubmitButtonProps> = ({ loading, title }) =
 					{title}
 				</>
 			) : (
-				'Save changes'
+				`${title}`
 			)}
 		</Button>
 	)

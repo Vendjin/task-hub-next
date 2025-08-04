@@ -11,26 +11,19 @@ import {
 } from '@/components'
 import { PUBLIC_PAGES } from '@/config'
 import type { IProfile } from '@/shared/types'
+import { useAuthStore } from '@/store'
 import { ChevronDown, LogOut } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-import { createSupabaseClient } from '@/utils/supabase'
-
 interface ISideBarAccountProps {
-	profile?: IProfile
+	profile: IProfile
 }
 
-export const SideBarAccount: React.FC<ISideBarAccountProps> = () => {
+export const SideBarAccount: React.FC<ISideBarAccountProps> = ({ profile }) => {
+	const email = useAuthStore(state => state.userLogin)
+	const logout = useAuthStore(state => state.logout)
 	const router = useRouter()
-
-	async function signOut() {
-		const { error } = await createSupabaseClient().auth.signOut()
-
-		if (!error) {
-			router.push(PUBLIC_PAGES.LOGIN)
-		}
-	}
 
 	return (
 		<div className='w-full'>
@@ -38,8 +31,8 @@ export const SideBarAccount: React.FC<ISideBarAccountProps> = () => {
 				<div className='flex items-center gap-2'>
 					<div className='h-10 w-10 rounded-full bg-[#806DF0]' />
 					<div className='flex flex-col'>
-						<span className='font-medium'>Bob Marley</span>
-						<span className='text-sm opacity-60'>some@email.com</span>
+						<span className='font-medium'>{profile.name}</span>
+						<span className='text-sm opacity-60'>{email}</span>
 					</div>
 				</div>
 				<DropdownMenu>
@@ -49,7 +42,12 @@ export const SideBarAccount: React.FC<ISideBarAccountProps> = () => {
 					<DropdownMenuContent className='mt-4 ml-4 w-56 rounded-2xl' align='end'>
 						<DropdownMenuLabel>My Account</DropdownMenuLabel>
 						<DropdownMenuGroup>
-							<DropdownMenuItem onClick={signOut}>
+							<DropdownMenuItem
+								onClick={() => {
+									logout()
+									router.push(PUBLIC_PAGES.LOGIN)
+								}}
+							>
 								LogOut
 								<DropdownMenuShortcut>
 									<LogOut />

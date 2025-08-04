@@ -35,7 +35,7 @@ export const useAuthStore = create<IAuthStore>()(
 			}
 		})),
 		{
-			name: 'auth-storage', // ключ в localStorage
+			name: 'auth-storage',
 			partialize: state => ({
 				userLogin: state.userLogin,
 				isLoggedIn: state.isLoggedIn
