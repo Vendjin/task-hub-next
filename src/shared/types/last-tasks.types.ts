@@ -3,6 +3,7 @@ import React from 'react'
 export interface IAssignee {
 	id: string
 	name: string
+	email?: string
 	avatarPath: string
 }
 

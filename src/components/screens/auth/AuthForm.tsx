@@ -23,6 +23,7 @@ export const AuthForm = () => {
 	const onSubmit = async (data: IAuthForm) => {
 		setLoading(true)
 
+		/*//Вариант для серверного actions
 		try {
 			const { error } = await signInWithEmail({ email: data.login })
 
@@ -36,7 +37,19 @@ export const AuthForm = () => {
 			toast.error('Something went wrong.')
 		} finally {
 			setLoading(false)
-		}
+		}*/
+
+		signInWithEmail({ email: data.login })
+			.then(() => {
+				toast.success('Check your email for login link.')
+			})
+			.catch(error => {
+				toast.error(`Failed to send sign-in link. Please try again letter. Error: ${error.message}`)
+			})
+			.finally(() => {
+				setLoading(false)
+				reset()
+			})
 	}
 
 	return (

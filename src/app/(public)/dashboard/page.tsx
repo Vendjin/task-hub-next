@@ -1,3 +1,4 @@
+import { getServiceTasks } from '@/services'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 
@@ -10,7 +11,11 @@ export const metadata: Metadata = {
 	title: 'Dashboard'
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+	const { data, error } = await getServiceTasks()
+	console.log({ data })
+	if (error) console.error(error)
+
 	return (
 		<div className='grid h-full grid-cols-[70%_30%]'>
 			<Suspense

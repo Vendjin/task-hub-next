@@ -1,3 +1,3 @@
 export { createSupabaseClient } from './client'
-export { createSupabaseServer } from './server'
+export { createSupabaseServer, createAdminClient } from './server'
 export { getServerAuth } from './get-server-auth'

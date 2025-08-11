@@ -5,13 +5,48 @@ const now = new Date().getTime()
 const day = 24 * 60 * 60 * 1000
 
 export const USERS: IAssignee[] = [
-	{ id: '1', name: 'David Blane', avatarPath: 'https://avatars.githubusercontent.com/u/1?v=4' },
-	{ id: '2', name: 'Bella Capably', avatarPath: 'https://avatars.githubusercontent.com/u/2?v=4' },
-	{ id: '3', name: 'Bob Marley', avatarPath: 'https://avatars.githubusercontent.com/u/3?v=4' },
-	{ id: '4', name: 'Sara Poulson', avatarPath: 'https://avatars.githubusercontent.com/u/4?v=4' },
-	{ id: '5', name: 'Stew Marchek', avatarPath: 'https://avatars.githubusercontent.com/u/5?v=4' },
-	{ id: '6', name: 'Jan Kusto', avatarPath: 'https://avatars.githubusercontent.com/u/6?v=4' },
-	{ id: '7', name: 'Emily Ratakovsky', avatarPath: 'https://avatars.githubusercontent.com/u/7?v=4' }
+	{
+		id: 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d',
+		name: 'David Blane',
+		email: 'david@blane.com',
+		avatarPath: 'https://avatars.githubusercontent.com/u/1?v=4'
+	},
+	{
+		id: 'f6e5d4c3-b2a1-4f8e-9d8c-7b6a5f4e3d2c',
+		name: 'Bella Capably',
+		email: 'bella@capaldy.com',
+		avatarPath: 'https://avatars.githubusercontent.com/u/2?v=4'
+	},
+	{
+		id: '3b4a5c6d-7e8f-4a1b-2c3d-4e5f6a7b8c9d',
+		name: 'Bob Marley',
+		email: 'bob@marley.com',
+		avatarPath: 'https://avatars.githubusercontent.com/u/3?v=4'
+	},
+	{
+		id: '9d8c7b6a-5f4e-3d2c-1b0a-9f8e7d6c5b4a',
+		name: 'Sara Poulson',
+		email: 'sara@polson.com',
+		avatarPath: 'https://avatars.githubusercontent.com/u/4?v=4'
+	},
+	{
+		id: '2e3f4a5b-6c7d-4e5f-1a2b-3c4d5e6f7a8b',
+		name: 'Stew Marchek',
+		email: 'stew@marchek.com',
+		avatarPath: 'https://avatars.githubusercontent.com/u/5?v=4'
+	},
+	{
+		id: '1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d',
+		name: 'Jan Kusto',
+		email: 'jan@kusto.com',
+		avatarPath: 'https://avatars.githubusercontent.com/u/6?v=4'
+	},
+	{
+		id: '6f5e4d3c-2b1a-4f8e-9d8c-7b6a5f4e3d2c',
+		name: 'Emily Ratakovsky',
+		email: 'emily@ratakovsky.com',
+		avatarPath: 'https://avatars.githubusercontent.com/u/7?v=4'
+	}
 ]
 
 export const LAST_TASKS_DATA: ITaskCard[] = [
