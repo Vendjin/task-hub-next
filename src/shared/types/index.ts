@@ -7,3 +7,4 @@ export type { ITaskCard, TProgressFilter, TSortedTasks, ITaskIcon, IAssignee, IS
 export type { ITaskFormValues } from './task-form.types'
 export type { ISubTaskForm } from './sub-task-form.types'
 export type { IAuthForm } from './auth-form.types'
+export type { TTask } from './task.types'

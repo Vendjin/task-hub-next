@@ -9,12 +9,17 @@ import React, { useState } from 'react'
 import { LastTaskCard } from '@/components/screens/dashboard/last-tasks/LastTaskCard'
 import { LastTasksHeader } from '@/components/screens/dashboard/last-tasks/LastTasksHeader'
 
+import type { TGetTasksResponse } from '@/shared/types/task.types'
+
 interface ILastTasksProps {
 	title?: string
+	tasks: TGetTasksResponse
 }
 
-export const LastTasks: React.FC<ILastTasksProps> = () => {
+export const LastTasks: React.FC<ILastTasksProps> = ({ tasks }) => {
 	const [filter, setFilter] = useState<TProgressFilter>('all')
+	console.log(tasks)
+
 	const lastTasks = useTasksStore(state => state.tasks)
 
 	const { sortOrder, sortedTasks, countersTasks, toggleSortOrder } = useTasksFilterSort({

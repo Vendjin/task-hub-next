@@ -1,8 +1,8 @@
+import './globals.css'
+import { QueryProvider, ThemeProvider } from '@/providers'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import './globals.css'
 import React from 'react'
-import { ThemeProvider } from '@/providers'
 
 const font = Poppins({
 	variable: '--font-sans ',
@@ -22,8 +22,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={`${font.variable}  antialiased`}>
-				<ThemeProvider>{children}</ThemeProvider>
+			<body className={`${font.variable} antialiased`}>
+				<QueryProvider>
+					<ThemeProvider>{children}</ThemeProvider>
+				</QueryProvider>
 			</body>
 		</html>
 	)

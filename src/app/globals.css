@@ -192,3 +192,9 @@ body {
     min-height: 100vh;
 }
 
+@media (max-height: 730px) {
+    .chat-header-image {
+        @apply hidden;
+    }
+}
+

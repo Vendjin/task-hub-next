@@ -26,7 +26,9 @@ export const TaskForm: React.FC<ITaskFormProps> = ({ taskId }) => {
 
 	const methods = useForm<ITaskFormValues>({
 		defaultValues: {
-			title: ''
+			title: '',
+			dueDate: undefined,
+			icon: undefined
 		}
 	})
 	const { handleSubmit, reset } = methods

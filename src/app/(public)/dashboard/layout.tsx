@@ -20,7 +20,7 @@ export default async function Layout({
 
 	return (
 		<>
-			<div className='grid h-screen grid-cols-[260px_1fr]'>
+			<div className='grid min-h-screen grid-cols-[260px_1fr]'>
 				<Sidebar />
 				<main>{children}</main>
 				{modal}

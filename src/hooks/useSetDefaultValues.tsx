@@ -8,8 +8,7 @@ export const useSetDefaultValuesTaskForm = (task: ITaskCard, reset: UseFormReset
 
 		reset({
 			title: task.title || '',
-			progress: task.progress,
-			dueDate: new Date(task.dueDate),
+			dueDate: new Date(),
 			icon: task.icon
 		})
 	}, [task, reset])
