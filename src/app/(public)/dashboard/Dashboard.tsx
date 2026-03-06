@@ -8,14 +8,15 @@ import { ProjectCharts, ProjectStats, TasksTimeline } from '@/components/screens
 import { LastTasks } from '@/components/screens/dashboard/last-tasks'
 import { HeadingDashboard } from '@/components/ui'
 
-import type { TGetTasksResponse } from '@/shared/types/task.types'
+import type { TGetTasksResponse, TGetTodayTasksResponse } from '@/shared/types/task.types'
 
 interface IDashboardProps {
 	className?: string
 	tasks: TGetTasksResponse
+	todayTasks: TGetTodayTasksResponse
 }
 
-export const Dashboard: React.FC<IDashboardProps> = ({ tasks }) => {
+export const Dashboard: React.FC<IDashboardProps> = ({ tasks, todayTasks }) => {
 	return (
 		<div className='grid h-screen grid-cols-[3.2fr_1fr]'>
 			<div className='flex flex-col gap-4 overflow-y-auto p-5'>
@@ -27,7 +28,7 @@ export const Dashboard: React.FC<IDashboardProps> = ({ tasks }) => {
 				</div>
 
 				<LastTasks tasks={tasks} />
-				<TasksTimeline />
+				<TasksTimeline tasks={todayTasks} />
 			</div>
 
 			<Chat />

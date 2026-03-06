@@ -41,10 +41,14 @@ export const AuthForm = () => {
 
 		signInWithEmail({ email: data.login })
 			.then(() => {
-				toast.success('Check your email for login link.')
+				toast.success('Check your email for login link.', {
+					id: 'login-success'
+				})
 			})
 			.catch(error => {
-				toast.error(`Failed to send sign-in link. Please try again letter. Error: ${error.message}`)
+				toast.error(`Failed to send sign-in link. Please try again letter. Error: ${error.message}`, {
+					id: 'login-error'
+				})
 			})
 			.finally(() => {
 				setLoading(false)

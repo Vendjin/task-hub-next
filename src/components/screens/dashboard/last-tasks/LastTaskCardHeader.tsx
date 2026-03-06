@@ -1,51 +1,62 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components'
 import { ICONS } from '@/shared/data'
-import type { ITaskCard } from '@/shared/types'
+import type { TTask } from '@/shared/types'
+import { cn } from '@/utils'
+import { differenceInCalendarDays, parseISO } from 'date-fns'
 import Image from 'next/image'
 import React, { useMemo } from 'react'
 
 interface ILastTaskCardHeaderProps {
-	taskCard: ITaskCard
+	task: TTask
 }
 
-export const LastTaskCardHeader: React.FC<ILastTaskCardHeaderProps> = ({ taskCard }) => {
+export const LastTaskCardHeader: React.FC<ILastTaskCardHeaderProps> = ({ task }) => {
 	const deadLine = useMemo(() => {
-		return Math.ceil((taskCard.dueDate.date.getTime() - Date.now()) / (24 * 60 * 60 * 1000))
-	}, [taskCard.dueDate.date])
+		return differenceInCalendarDays(parseISO(task.due_date), new Date())
+	}, [task.due_date])
 
 	return (
 		<div className='flex items-center justify-between'>
 			<div className='flex items-center gap-2'>
 				<div className='text-primary flex h-12 w-12 items-center justify-center rounded-full bg-violet-100 p-2 dark:bg-violet-200'>
-					{ICONS[taskCard.icon].value}
+					{ICONS[task.icon!].value}
 				</div>
 				<div>
-					<h3 className='font-medium'>{taskCard.title}</h3>
-					<span className='text-sm text-neutral-400 dark:text-neutral-500'>
-						Due: {deadLine > 0 ? deadLine : 0} day{deadLine !== 1 ? 's' : ''}
+					<h3 className='font-medium'>{task.title}</h3>
+					<span
+						className={cn(
+							'text-sm',
+							deadLine < 0 ? 'text-destructive font-medium' : 'text-neutral-400 dark:text-neutral-500'
+						)}
+					>
+						{deadLine === 0 && 'Due: Today'}
+						{deadLine < 0 && `Expired: ${Math.abs(deadLine)}d ago`}
+						{deadLine > 0 && `${deadLine} day${deadLine !== 1 ? 's' : ''}`}
 					</span>
 				</div>
 			</div>
 
 			<div className='flex'>
-				{taskCard.assignees.map((assignee, index) => (
-					<div key={assignee.id} className={`relative ${index !== 0 ? '-ml-3' : ''} z-${index}`}>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<Image
-									src={assignee.avatarPath}
-									alt={assignee.name}
-									width={40}
-									height={40}
-									className='rounded-full border-2 border-white bg-gray-300'
-								/>
-							</TooltipTrigger>
-							<TooltipContent>
-								<p>{assignee.name}</p>
-							</TooltipContent>
-						</Tooltip>
-					</div>
-				))}
+				{task.task_participants
+					.filter(u => Boolean(u.profile))
+					.map(({ profile }, index) => (
+						<div key={profile.id} className={`relative ${index !== 0 ? '-ml-3' : ''} z-${index}`}>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Image
+										src={profile.avatar_path!.trim() || ''}
+										alt={profile.name!.trim() || ''}
+										width={40}
+										height={40}
+										className='rounded-full border-2 border-white bg-gray-300'
+									/>
+								</TooltipTrigger>
+								<TooltipContent>
+									<p>{profile.name}</p>
+								</TooltipContent>
+							</Tooltip>
+						</div>
+					))}
 			</div>
 		</div>
 	)

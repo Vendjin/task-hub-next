@@ -1,4 +1,5 @@
 import { getServiceTasks } from '@/services'
+import { getTodayTasks } from '@/services/tasks'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function DashboardPage() {
-	const { data } = await getServiceTasks()
+	const [tasks, todayTasks] = await Promise.all([getServiceTasks(), getTodayTasks()])
 
 	return (
 		<Suspense
@@ -21,7 +22,7 @@ export default async function DashboardPage() {
 				</div>
 			}
 		>
-			<Dashboard tasks={data || []} />
+			<Dashboard tasks={tasks.data || []} todayTasks={todayTasks.data || []} />
 		</Suspense>
 	)
 }

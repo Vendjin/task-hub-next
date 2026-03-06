@@ -1,11 +1,12 @@
 import { getTaskProgressService } from '@/services'
-import type { ISubtask } from '@/shared/types'
 import cn from 'clsx'
 import { CircleCheck } from 'lucide-react'
 import React from 'react'
 
+import type { TSubTask } from '@/shared/types/task.types'
+
 interface ILastTaskProgressBarProps {
-	subTasks: ISubtask[]
+	subTasks: TSubTask[]
 }
 
 export const LastTaskCardProgressBar: React.FC<ILastTaskProgressBarProps> = ({ subTasks }) => {

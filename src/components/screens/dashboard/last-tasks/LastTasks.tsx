@@ -3,7 +3,6 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components'
 import { useTasksFilterSort } from '@/hooks'
 import type { TProgressFilter } from '@/shared/types'
-import { useTasksStore } from '@/store'
 import React, { useState } from 'react'
 
 import { LastTaskCard } from '@/components/screens/dashboard/last-tasks/LastTaskCard'
@@ -18,27 +17,24 @@ interface ILastTasksProps {
 
 export const LastTasks: React.FC<ILastTasksProps> = ({ tasks }) => {
 	const [filter, setFilter] = useState<TProgressFilter>('all')
-	console.log(tasks)
 
-	const lastTasks = useTasksStore(state => state.tasks)
+	// const { sortOrder, sortedTasks, countersTasks, toggleSortOrder } = useTasksFilterSort({
+	// 	tasks: tasks ?? [],
+	// 	filter
+	// })
 
-	const { sortOrder, sortedTasks, countersTasks, toggleSortOrder } = useTasksFilterSort({
-		tasks: lastTasks ?? [],
-		filter
-	})
-
-	const countTasks = sortedTasks.length
+	const countTasks = tasks.length
 
 	return (
 		<div className='mt-2 flex w-full flex-col gap-2'>
-			<LastTasksHeader
-				countTask={countTasks}
-				valueFilter={filter}
-				onChangeFilter={setFilter}
-				counters={countersTasks}
-				sort={sortOrder}
-				toggleSort={toggleSortOrder}
-			/>
+			{/*<LastTasksHeader*/}
+			{/*	countTask={countTasks}*/}
+			{/*	valueFilter={filter}*/}
+			{/*	onChangeFilter={setFilter}*/}
+			{/*	counters={countersTasks}*/}
+			{/*	sort={sortOrder}*/}
+			{/*	toggleSort={toggleSortOrder}*/}
+			{/*/>*/}
 
 			{countTasks ? (
 				<Carousel
@@ -49,7 +45,7 @@ export const LastTasks: React.FC<ILastTasksProps> = ({ tasks }) => {
 					className='relative w-full'
 				>
 					<CarouselContent>
-						{sortedTasks.map(taskCard => (
+						{tasks.map(taskCard => (
 							<CarouselItem key={taskCard.id} className='basis-1/3'>
 								<LastTaskCard taskCard={taskCard} />
 							</CarouselItem>

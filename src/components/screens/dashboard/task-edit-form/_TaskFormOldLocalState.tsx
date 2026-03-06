@@ -7,9 +7,9 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { DeadLineInput } from '@/components/screens/dashboard/task-form/DeadLineInput'
-import { IconSelector } from '@/components/screens/dashboard/task-form/IconSelector'
-import { TitleInput } from '@/components/screens/dashboard/task-form/TitleInput'
+import { DeadLineInput } from '@/components/screens/dashboard/task-edit-form/DeadLineInput'
+import { IconSelector } from '@/components/screens/dashboard/task-edit-form/IconSelector'
+import { TitleInput } from '@/components/screens/dashboard/task-edit-form/TitleInput'
 import { Form, SubmitButton } from '@/components/ui'
 
 import { useSetDefaultValuesTaskForm } from '@/hooks/useSetDefaultValues'
@@ -18,9 +18,10 @@ interface ITaskFormProps {
 	taskId: string
 }
 
-export const TaskForm: React.FC<ITaskFormProps> = ({ taskId }) => {
+export const TaskFormOldLocalState: React.FC<ITaskFormProps> = ({ taskId }) => {
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
+
 	const task = useTasksStore(state => state.getTask(Number(taskId)))
 	const taskUpdate = useTasksStore(state => state.updateTask)
 
@@ -55,6 +56,7 @@ export const TaskForm: React.FC<ITaskFormProps> = ({ taskId }) => {
 				onClick: () => console.log('Тут можно сделать сайд-эффекты', task)
 			}
 		})
+
 		setLoading(false)
 		router.back()
 	}
@@ -65,7 +67,6 @@ export const TaskForm: React.FC<ITaskFormProps> = ({ taskId }) => {
 				<TitleInput />
 				<DeadLineInput />
 				<IconSelector />
-
 				<SubmitButton loading={loading} title='Save changes' />
 			</form>
 		</Form>

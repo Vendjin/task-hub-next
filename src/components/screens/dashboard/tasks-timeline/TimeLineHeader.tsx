@@ -1,11 +1,11 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components'
-import type { IAssignee } from '@/shared/types'
+import type { TUserProfile } from '@/shared/types'
 import { cn } from '@/utils'
 import Image from 'next/image'
 import React from 'react'
 
 interface ITimeLineHeaderProps {
-	users: IAssignee[]
+	users: TUserProfile[]
 }
 
 export const TimeLineHeader: React.FC<ITimeLineHeaderProps> = ({ users }) => {
@@ -25,8 +25,8 @@ export const TimeLineHeader: React.FC<ITimeLineHeaderProps> = ({ users }) => {
 							<Tooltip>
 								<TooltipTrigger asChild>
 									<Image
-										src={user.avatarPath}
-										alt={user.name}
+										src={user.avatar_path!.trim()}
+										alt={user.name!.trim()}
 										width={40}
 										height={40}
 										className='rounded-full border-2 border-white bg-gray-300'

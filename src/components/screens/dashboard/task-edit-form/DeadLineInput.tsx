@@ -2,7 +2,7 @@ import { Button, Calendar } from '@/components'
 import { cn } from '@/utils'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
@@ -15,6 +15,8 @@ interface IDeadLineInputProps {
 export const DeadLineInput: React.FC<IDeadLineInputProps> = () => {
 	const { control } = useFormContext()
 
+	const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+
 	return (
 		<FormField
 			control={control}
@@ -22,12 +24,15 @@ export const DeadLineInput: React.FC<IDeadLineInputProps> = () => {
 			render={({ field }) => (
 				<FormItem className='flex w-full flex-col'>
 					<FormLabel className='text-muted-foreground'>Deadline</FormLabel>
-					<Popover>
+					<Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
 						<PopoverTrigger asChild>
 							<FormControl>
 								<Button
 									variant={'outline'}
-									className={cn('l-3 text-left font-normal', !field.value && 'text-muted-foreground')}
+									className={cn(
+										'pl-3 text-left font-normal',
+										!field.value && 'text-muted-foreground'
+									)}
 								>
 									{field.value instanceof Date && !isNaN(field.value.getTime()) ? (
 										format(field.value, 'PPP')
@@ -43,8 +48,13 @@ export const DeadLineInput: React.FC<IDeadLineInputProps> = () => {
 							<Calendar
 								mode='single'
 								selected={field.value}
-								onSelect={field.onChange}
+								onSelect={date => {
+									field.onChange(date)
+									if (date) setIsCalendarOpen(false)
+								}}
+								autoFocus
 								captionLayout='dropdown'
+								disabled={date => date < new Date(new Date().setHours(0, 0, 0, 0))}
 							/>
 						</PopoverContent>
 					</Popover>

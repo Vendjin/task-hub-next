@@ -1,11 +1,11 @@
 import { DASHBOARD_PAGES } from '@/config'
-import type { ITaskCard } from '@/shared/types'
+import type { TTask } from '@/shared/types'
 import { Image as ImageIcon, Link as LinkIcon, MessageSquareText, Pencil, Plus } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
 interface ILastTaskCardToolbarProps {
-	taskCard: ITaskCard
+	taskCard: TTask
 }
 
 export const LastTaskCardToolbar: React.FC<ILastTaskCardToolbarProps> = ({ taskCard }) => {
@@ -14,17 +14,17 @@ export const LastTaskCardToolbar: React.FC<ILastTaskCardToolbarProps> = ({ taskC
 			<div className='flex items-center justify-between gap-4 text-sm'>
 				<div className='flex items-center gap-1'>
 					<MessageSquareText className='h-5 w-5 text-neutral-400' />
-					<span>{taskCard.comments.length}</span>
+					<span>{/*{taskCard.comments.length}*/}3</span>
 				</div>
 
 				<div className='flex items-center gap-1'>
 					<ImageIcon className='h-5 w-5 text-neutral-400' />
-					<span>{taskCard.attachments.length}</span>
+					<span>{/*{taskCard.attachments.length}*/}</span>6
 				</div>
 
 				<div className='flex items-center gap-1'>
 					<LinkIcon className='h-4.5 w-4.5 text-neutral-400' />
-					<span>{taskCard.links.length}</span>
+					<span>{/*{taskCard.links.length}*/}2</span>
 				</div>
 			</div>
 
@@ -37,6 +37,7 @@ export const LastTaskCardToolbar: React.FC<ILastTaskCardToolbarProps> = ({ taskC
 				</Link>
 				<Link
 					href={DASHBOARD_PAGES.TASK(taskCard.id)}
+					aria-label={`Edit task: ${taskCard.id}`}
 					className='border-primary hover:text-primary inline-flex h-8 w-8 items-center justify-center rounded-full border text-neutral-400 transition-colors'
 				>
 					<Pencil className='h-4 w-4' />

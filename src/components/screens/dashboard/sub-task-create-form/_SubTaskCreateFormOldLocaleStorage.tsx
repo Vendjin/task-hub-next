@@ -7,13 +7,13 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { TitleInputSubtask } from '@/components/screens/dashboard/sub-task-form/TitleInputSubtask'
+import { TitleInputSubtask } from '@/components/screens/dashboard/sub-task-create-form/TitleInputSubtask'
 
 interface ISubTaskFormProps {
 	taskId: string
 }
 
-export const SubTaskForm: React.FC<ISubTaskFormProps> = ({ taskId }) => {
+export const SubTaskCreateFormOldLocaleStorage: React.FC<ISubTaskFormProps> = ({ taskId }) => {
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
 	const task = useTasksStore(state => state.getTask(Number(taskId)))

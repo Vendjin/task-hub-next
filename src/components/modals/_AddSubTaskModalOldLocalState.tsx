@@ -12,7 +12,7 @@ interface IAddSubTaskModalProps {
 	taskId: string
 }
 
-export const AddSubTaskModal: React.FC<IAddSubTaskModalProps> = ({ taskId }) => {
+export const AddSubTaskModalOldLocalState: React.FC<IAddSubTaskModalProps> = ({ taskId }) => {
 	const router = useRouter()
 	const task = useTasksStore(state => state.getTask(Number(taskId)))
 

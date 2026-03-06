@@ -1,22 +1,26 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components'
 import { ICONS } from '@/shared/data'
-import type { ITaskCard } from '@/shared/types'
+import type { TTask } from '@/shared/types'
 import { cn } from '@/utils'
 import { format } from 'date-fns'
+import { parse } from 'date-fns/parse'
 import Image from 'next/image'
 import React from 'react'
 
 interface ITaskTimelineProps {
-	task: ITaskCard
+	task: TTask
 }
 
-export const TaskTimeline: React.FC<ITaskTimelineProps> = ({ task }) => {
-	const icon = ICONS[task.icon].value
+export const TimelineCard: React.FC<ITaskTimelineProps> = ({ task }) => {
+	const icon = ICONS[task.icon!].value
+
+	const formatTaskTime = (timeStr: string) => {
+		const date = parse(timeStr, 'HH:mm:ss', new Date())
+		return format(date, 'h:mm a')
+	}
 
 	const timeRange =
-		task.dueDate.startTime && task.dueDate.endTime
-			? `${format(task.dueDate.startTime, 'h:mm a')} - ${format(task.dueDate.endTime, 'h:mm a')}`
-			: ''
+		task.start_time && task.end_time ? `${formatTaskTime(task.start_time)} - ${formatTaskTime(task.end_time)}` : ''
 
 	return (
 		<div className={cn('border-block bg-counter rounded-xl p-5', task.color)}>
@@ -33,24 +37,24 @@ export const TaskTimeline: React.FC<ITaskTimelineProps> = ({ task }) => {
 			</div>
 
 			<div className='mt-3 flex'>
-				{task.assignees.map((assignee, index) => (
+				{task.task_participants.map((assignee, index) => (
 					<div
-						key={assignee.id}
+						key={assignee.profile.id}
 						className={cn('relative', index !== 0 && '-ml-3')}
 						style={{ zIndex: 10 - index }}
 					>
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Image
-									src={assignee.avatarPath}
-									alt={assignee.name}
+									src={assignee.profile.avatar_path!.trim()}
+									alt={assignee.profile.name!.trim()}
 									width={35}
 									height={35}
 									className='rounded-full border-2 border-white bg-gray-300'
 								/>
 							</TooltipTrigger>
 							<TooltipContent>
-								<p>{assignee.name}</p>
+								<p>{assignee.profile.name}</p>
 							</TooltipContent>
 						</Tooltip>
 					</div>

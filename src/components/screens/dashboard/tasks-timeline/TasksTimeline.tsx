@@ -1,32 +1,44 @@
 'use client'
 
-import { useTasksStore } from '@/store'
+import { parseTime } from '@/utils'
 import { getHours, getMinutes } from 'date-fns'
-import React, { useMemo } from 'react'
+import React from 'react'
 
-import { TaskTimeline } from '@/components/screens/dashboard/tasks-timeline/TaskTimeline'
 import { TimeLineHeader } from '@/components/screens/dashboard/tasks-timeline/TimeLineHeader'
+import { TimelineCard } from '@/components/screens/dashboard/tasks-timeline/TimelineCard'
+
+import type { TGetTodayTasksResponse } from '@/shared/types/task.types'
 
 interface ITasksTimelineProps {
 	title?: string
+	tasks: TGetTodayTasksResponse
 }
 
-export const TasksTimeline: React.FC<ITasksTimelineProps> = () => {
-	const getTodayTasks = useTasksStore(state => state.getTodayTasks)
-	const todayTasks = useMemo(() => getTodayTasks(), [getTodayTasks])
-
-	const users = [...new Map(todayTasks?.flatMap(task => task.assignees).map(user => [user.id, user])).values()]
+export const TasksTimeline: React.FC<ITasksTimelineProps> = ({ tasks }) => {
+	const users = [
+		...new Map(
+			tasks
+				?.flatMap(task => task.task_participants)
+				.filter(user => Boolean(user.profile))
+				.map(user => [user.profile.id, user.profile])
+		).values()
+	]
 
 	return (
 		<div className='bg-block rounded-xl p-5'>
 			<TimeLineHeader users={users} />
-			<div className='relative h-75'>
-				{todayTasks?.map(task => {
-					const start = getHours(task.dueDate.startTime ?? task.dueDate.date)
-					const end = getHours(task.dueDate.endTime ?? task.dueDate.date)
+			<div className='relative h-72'>
+				{tasks?.map(task => {
+					if (!task.start_time || !task.end_time) return null
 
-					const startMinutes = getMinutes(task.dueDate.startTime ?? task.dueDate.date)
-					const endMinutes = getMinutes(task.dueDate.endTime ?? task.dueDate.date)
+					const correctStartTime = parseTime(task.due_date, task.start_time)
+					const correctEndTime = parseTime(task.due_date, task.end_time)
+
+					const start = getHours(correctStartTime)
+					const end = getHours(correctEndTime)
+
+					const startMinutes = getMinutes(correctStartTime)
+					const endMinutes = getMinutes(correctEndTime)
 
 					const startPercent = (((start - 9) * 60 + startMinutes) / ((17 - 9) * 60)) * 100
 					const endPercent = (((end - 9) * 60 + endMinutes) / ((17 - 9) * 60)) * 100
@@ -41,7 +53,7 @@ export const TasksTimeline: React.FC<ITasksTimelineProps> = () => {
 								width: `${widthPercent}%`
 							}}
 						>
-							<TaskTimeline task={task} />
+							<TimelineCard task={task} />
 						</div>
 					)
 				})}
