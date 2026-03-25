@@ -1,24 +1,24 @@
-import type { TSortedTasks } from '@/shared/types'
-import { ArrowDown01, ArrowUp10, ArrowUpDown } from 'lucide-react'
+import { ArrowDown01, ArrowUp10 } from 'lucide-react'
 import React from 'react'
 
+import type { TTaskSortBy } from '@/shared/types/task.types'
+
 interface ILastTasksSortProps {
-	order: TSortedTasks
-	toggleOrder: () => void
+	sort: TTaskSortBy
+	setSort: (sort: TTaskSortBy) => void
 }
 
-export const LastTasksSort: React.FC<ILastTasksSortProps> = ({ order, toggleOrder }) => {
+export const LastTasksSort: React.FC<ILastTasksSortProps> = ({ sort, setSort }) => {
 	return (
 		<div className='item-center bg-block flex rounded-lg border p-1'>
 			<button
-				onClick={toggleOrder}
+				onClick={() => setSort(sort === 'asc' ? 'desc' : 'asc')}
 				aria-label='Сортировка по дедлайну'
 				className='hover:text-primary-active text-xl text-neutral-400'
 				type='button'
 			>
-				{order === 'none' && <ArrowUpDown />}
-				{order === 'asc' && <ArrowUp10 />}
-				{order === 'desc' && <ArrowDown01 />}
+				{sort === 'asc' && <ArrowUp10 />}
+				{sort === 'desc' && <ArrowDown01 />}
 			</button>
 		</div>
 	)

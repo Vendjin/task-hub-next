@@ -4,9 +4,9 @@ import { MENU, PROFILE, PROJECTS } from '@/shared/data'
 import { useAuthStore } from '@/store'
 import React from 'react'
 
-import { SideBarAccount } from '@/components/ui/sidebar-menu/SideBarAccount'
 import { SideBarDivider } from '@/components/ui/sidebar-menu/SideBarDivider'
 import { SideBarMainMenu } from '@/components/ui/sidebar-menu/SideBarMainMenu'
+import { SideBarProfile } from '@/components/ui/sidebar-menu/SideBarProfile'
 import { SideBarProjects } from '@/components/ui/sidebar-menu/SideBarProjects'
 
 interface ISidebarProps {
@@ -21,7 +21,7 @@ export const SidebarWithStore: React.FC<ISidebarProps> = () => {
 			{isLoggedIn && (
 				<>
 					<SideBarDivider title='Account' />
-					<SideBarAccount profile={PROFILE} />
+					<SideBarProfile profile={PROFILE} />
 				</>
 			)}
 			<SideBarDivider title='Main Menu' />

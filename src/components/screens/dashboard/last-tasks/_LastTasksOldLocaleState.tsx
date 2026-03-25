@@ -1,55 +1,43 @@
 'use client'
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components'
+import { useTasksFilterSort } from '@/hooks'
 import { getClientTasks } from '@/services/tasks/task-client.service'
+import type { TProgressFilter } from '@/shared/types'
 import { useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
 
+
 import { LastTaskCard } from '@/components/screens/dashboard/last-tasks/LastTaskCard'
-import { LastTaskFilter } from '@/components/screens/dashboard/last-tasks/LastTaskFilter'
-import { LastTasksSort } from '@/components/screens/dashboard/last-tasks/LastTasksSort'
-import { SkeletonLoader } from '@/components/ui/SkeletonLoader'
 
 import type { TGetTasksResponse, TTaskSortBy, TTaskStatus } from '@/shared/types/task.types'
+
 
 interface ILastTasksProps {
 	title?: string
 	tasks: TGetTasksResponse
 }
 
-export const LastTasks: React.FC<ILastTasksProps> = ({ tasks }) => {
-	const [status, setStatus] = useState<TTaskStatus | undefined>(undefined)
-	const [sort, setSort] = useState<TTaskSortBy>('asc')
+export const LastTasksLocaleState: React.FC<ILastTasksProps> = ({ tasks }) => {
+	const [filter, setFilter] = useState<TProgressFilter>('all')
 
-	const { data, isPending } = useQuery({
-		queryKey: ['last-tasks', status, sort],
-		queryFn: () => getClientTasks({ status, sortByDueDate: sort }),
-		placeholderData: tasks
+	const { sortOrder, sortedTasks, countersTasks, toggleSortOrder } = useTasksFilterSort({
+		tasks: tasks ?? [],
+		filter
 	})
-
-	const countTasks = data?.length ?? 0
 
 	return (
 		<div className='mt-2 flex w-full flex-col gap-2'>
-			<div className='flex items-center justify-between'>
-				<div className='flex items-center gap-2'>
-					<h2 className='text-2xl font-medium'>Last Tasks</h2>
-					{countTasks > 0 && (
-						<span className='font-medium text-neutral-400 dark:text-neutral-500'>{`(${countTasks})`}</span>
-					)}
-				</div>
+			{/*<LastTasksHeader*/}
+			{/*	countTask={countTasks}*/}
+			{/*	valueFilter={filter}*/}
+			{/*	onChangeFilter={setFilter}*/}
+			{/*	counters={countersTasks}*/}
+			{/*	sort={sortOrder}*/}
+			{/*	toggleSort={toggleSortOrder}*/}
+			{/*/>*/}
 
-				<div className='flex items-center gap-2'>
-					<LastTaskFilter status={status} setStatus={setStatus} />
-					<LastTasksSort sort={sort} setSort={setSort} />
-				</div>
-			</div>
-
-			{isPending ? (
-				<div className='grid grid-cols-3 gap-4'>
-					<SkeletonLoader count={3} />
-				</div>
-			) : countTasks ? (
+			{countersTasks ? (
 				<Carousel
 					opts={{
 						align: 'start',
@@ -58,7 +46,7 @@ export const LastTasks: React.FC<ILastTasksProps> = ({ tasks }) => {
 					className='relative w-full'
 				>
 					<CarouselContent>
-						{data?.map(taskCard => (
+						{tasks.map(taskCard => (
 							<CarouselItem key={taskCard.id} className='basis-1/3'>
 								<LastTaskCard taskCard={taskCard} />
 							</CarouselItem>

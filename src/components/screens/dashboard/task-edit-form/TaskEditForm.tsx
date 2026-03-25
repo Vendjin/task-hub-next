@@ -3,7 +3,7 @@
 import { taskClientUpdate } from '@/services/tasks'
 import type { TTask } from '@/shared/types'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -45,6 +45,8 @@ export const TaskEditForm: React.FC<ITaskFormProps> = ({ task }) => {
 	})
 
 	useSetDefaultValuesTaskForm(task, methods.reset)
+
+	const queryClient = useQueryClient()
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['task', 'update', task],

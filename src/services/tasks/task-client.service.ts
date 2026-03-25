@@ -3,6 +3,7 @@
 import { createSupabaseClient } from '@/utils/supabase'
 
 import type { Database } from '@/shared/types/db.types'
+import type { TTask, TTaskSortBy, TTaskStatus } from '@/shared/types/task.types'
 
 export async function taskClientGetById(id: string) {
 	const client = createSupabaseClient()
@@ -54,6 +55,44 @@ export async function createClientSubTask(taskId: string, subTask: Database['pub
 		.single()
 
 	if (error || !data) throw new Error(error.message || 'Failed to create sub-task')
+
+	return data
+}
+
+function filterTasks(tasks: TTask[], status: TTaskStatus) {
+	return tasks.filter(task => {
+		switch (status) {
+			case 'not-started':
+				return task.sub_task.every(subTask => !subTask.is_completed)
+
+			case 'in-progress':
+				return task.sub_task.some(subTask => subTask.is_completed)
+
+			case 'completed':
+				return task.sub_task.every(subTask => subTask.is_completed)
+
+			default:
+				return true
+		}
+	})
+}
+
+export async function getClientTasks({ status, sortByDueDate }: { status?: TTaskStatus; sortByDueDate?: TTaskSortBy }) {
+	const client = createSupabaseClient()
+
+	let query = client.from('task').select('*, sub_task(*), task_participants(profile(*))')
+
+	if (sortByDueDate) {
+		query = query.order('due_date', {
+			ascending: sortByDueDate === 'asc'
+		})
+	}
+
+	const { data, error } = await query
+
+	if (error || !data) throw new Error(error.message || 'Failed to get tasks')
+
+	if (status) return filterTasks(data, status)
 
 	return data
 }

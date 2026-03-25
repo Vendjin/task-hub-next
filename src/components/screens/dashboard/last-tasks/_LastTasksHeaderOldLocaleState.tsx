@@ -13,7 +13,7 @@ interface ILastTasksTitleProps {
 	toggleSort: () => void
 }
 
-export const LastTasksHeader: React.FC<ILastTasksTitleProps> = ({
+export const LastTasksHeaderOldLocaleState: React.FC<ILastTasksTitleProps> = ({
 	countTask,
 	valueFilter,
 	onChangeFilter,

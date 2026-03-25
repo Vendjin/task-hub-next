@@ -1,5 +1,6 @@
 import { Toaster } from '@/components'
 import { PUBLIC_PAGES } from '@/config'
+import { getServerProfile } from '@/services/profile'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
@@ -15,13 +16,14 @@ export default async function Layout({
 	modal: React.ReactNode
 }>) {
 	const user = await getServerAuth()
-
 	if (!user) redirect(PUBLIC_PAGES.LOGIN)
+
+	const profile = await getServerProfile()
 
 	return (
 		<>
 			<div className='grid min-h-screen grid-cols-[260px_1fr]'>
-				<Sidebar />
+				<Sidebar data={profile} />
 				<main>{children}</main>
 				{modal}
 			</div>

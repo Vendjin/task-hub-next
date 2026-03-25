@@ -21,7 +21,7 @@ export const TaskInfoModal: React.FC<ITaskInfoModalProps> = ({ taskId }) => {
 		isLoading,
 		isError
 	} = useQuery({
-		queryKey: ['task', 'id'],
+		queryKey: ['task', taskId],
 		queryFn: () => taskClientGetById(taskId),
 		enabled: !!taskId
 	})
