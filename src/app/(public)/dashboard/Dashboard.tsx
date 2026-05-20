@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Chat } from '@/app/(public)/dashboard/Chat'
+import { Chat } from '@/app/(public)/dashboard/chat/Chat'
 
 import { ProjectCharts, ProjectStats, TasksTimeline } from '@/components/screens/dashboard'
 import { LastTasks } from '@/components/screens/dashboard/last-tasks'

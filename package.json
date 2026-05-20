@@ -8,7 +8,8 @@
 		"start": "next start",
 		"lint": "next lint",
 		"format": "prettier --plugin-search-dir=. --write .",
-		"ts-check": "tsc --noEmit"
+		"ts-check": "tsc --noEmit",
+		"db:gen": "supabase gen types typescript --project-id \"mnmxjmncmepqucbynmnn\" --schema public> src/shared/types/db.types.ts"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.2.2",
