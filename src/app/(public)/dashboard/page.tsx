@@ -1,4 +1,7 @@
 import { getServiceTasks } from '@/services'
+import { getServerProfile } from '@/services/profile'
+import { getServerProjectChartData } from '@/services/statistics/chart/project-chart-server.service'
+import { getServerProjectStats } from '@/services/statistics/project-stat-server.service'
 import { getTodayTasks } from '@/services/tasks'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
@@ -12,7 +15,15 @@ export const metadata: Metadata = {
 }
 
 export default async function DashboardPage() {
-	const [tasks, todayTasks] = await Promise.all([getServiceTasks(), getTodayTasks()])
+	//Подгружаем данные с сервера, потом дотяем уже танстаком
+	const [tasks, todayTasks, projectStats, projectChartData] = await Promise.all([
+		getServiceTasks(),
+		getTodayTasks(),
+		getServerProjectStats(),
+		getServerProjectChartData('yearly')
+	])
+
+	const data = await getServerProfile()
 
 	return (
 		<Suspense
@@ -22,7 +33,13 @@ export default async function DashboardPage() {
 				</div>
 			}
 		>
-			<Dashboard tasks={tasks.data || []} todayTasks={todayTasks.data || []} />
+			<Dashboard
+				tasks={tasks.data || []}
+				todayTasks={todayTasks.data || []}
+				userId={data.id}
+				projectStats={projectStats.data || []}
+				projectChartData={projectChartData.data || []}
+			/>
 		</Suspense>
 	)
 }

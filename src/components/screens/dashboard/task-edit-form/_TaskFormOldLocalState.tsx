@@ -10,9 +10,8 @@ import { toast } from 'sonner'
 import { DeadLineInput } from '@/components/screens/dashboard/task-edit-form/DeadLineInput'
 import { IconSelector } from '@/components/screens/dashboard/task-edit-form/IconSelector'
 import { TitleInput } from '@/components/screens/dashboard/task-edit-form/TitleInput'
+import { useSetDefaultValuesTaskForm } from '@/components/screens/dashboard/task-edit-form/useSetDefaultValues'
 import { Form, SubmitButton } from '@/components/ui'
-
-import { useSetDefaultValuesTaskForm } from '@/hooks/useSetDefaultValues'
 
 interface ITaskFormProps {
 	taskId: string

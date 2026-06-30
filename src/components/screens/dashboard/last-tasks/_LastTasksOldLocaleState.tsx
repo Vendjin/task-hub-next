@@ -1,17 +1,15 @@
 'use client'
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components'
-import { useTasksFilterSort } from '@/hooks'
+import { useTasksFilterSortOld } from '@/hooks'
 import { getClientTasks } from '@/services/tasks/task-client.service'
 import type { TProgressFilter } from '@/shared/types'
 import { useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
 
-
 import { LastTaskCard } from '@/components/screens/dashboard/last-tasks/LastTaskCard'
 
 import type { TGetTasksResponse, TTaskSortBy, TTaskStatus } from '@/shared/types/task.types'
-
 
 interface ILastTasksProps {
 	title?: string
@@ -21,7 +19,7 @@ interface ILastTasksProps {
 export const LastTasksLocaleState: React.FC<ILastTasksProps> = ({ tasks }) => {
 	const [filter, setFilter] = useState<TProgressFilter>('all')
 
-	const { sortOrder, sortedTasks, countersTasks, toggleSortOrder } = useTasksFilterSort({
+	const { sortOrder, sortedTasks, countersTasks, toggleSortOrder } = useTasksFilterSortOld({
 		tasks: tasks ?? [],
 		filter
 	})

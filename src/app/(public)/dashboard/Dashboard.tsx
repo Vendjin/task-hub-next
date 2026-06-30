@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/utils'
 import React from 'react'
 
 import { Chat } from '@/app/(public)/dashboard/chat/Chat'
@@ -8,30 +9,37 @@ import { ProjectCharts, ProjectStats, TasksTimeline } from '@/components/screens
 import { LastTasks } from '@/components/screens/dashboard/last-tasks'
 import { HeadingDashboard } from '@/components/ui'
 
+import type { TGetProjectStatsResponse, TGetServerProjectChartDataResponse } from '@/shared/types/statistics.types'
 import type { TGetTasksResponse, TGetTodayTasksResponse } from '@/shared/types/task.types'
 
 interface IDashboardProps {
-	className?: string
 	tasks: TGetTasksResponse
 	todayTasks: TGetTodayTasksResponse
+	userId: string
+	projectStats: TGetProjectStatsResponse
+	projectChartData: TGetServerProjectChartDataResponse
 }
 
-export const Dashboard: React.FC<IDashboardProps> = ({ tasks, todayTasks }) => {
+export const Dashboard: React.FC<IDashboardProps> = ({ tasks, todayTasks, userId, projectStats, projectChartData }) => {
 	return (
 		<div className='grid h-screen grid-cols-[3.2fr_1fr]'>
-			<div className='flex flex-col gap-4 overflow-y-auto p-5'>
-				<HeadingDashboard />
-
-				<div className='flex gap-6'>
-					<ProjectStats />
-					<ProjectCharts />
+			<div className='overflow-y-auto p-5'>
+				<div className='mb-6 flex items-center justify-between'>
+					<HeadingDashboard />
 				</div>
 
-				<LastTasks tasks={tasks} />
-				<TasksTimeline tasks={todayTasks} />
+				<div className='flex gap-6'>
+					<ProjectStats projectStats={projectStats} />
+					<ProjectCharts projectChartData={projectChartData} />
+				</div>
+
+				<div className={cn('mb-7 grid gap-6', 'grid-cols-[100%]')}>
+					<LastTasks tasks={tasks} />
+					<TasksTimeline tasks={todayTasks} />
+				</div>
 			</div>
 
-			<Chat />
+			<Chat userId={userId} />
 		</div>
 	)
 }

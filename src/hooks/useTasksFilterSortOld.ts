@@ -7,7 +7,7 @@ interface ITasksFilterSortOptions {
 	filter: TProgressFilter
 }
 
-export const useTasksFilterSort = ({ tasks, filter }: ITasksFilterSortOptions) => {
+export const useTasksFilterSortOld = ({ tasks, filter }: ITasksFilterSortOptions) => {
 	const [sortOrder, setSortOrder] = useState<TSortedTasks>('none')
 
 	const tasksWithProgress = useMemo(

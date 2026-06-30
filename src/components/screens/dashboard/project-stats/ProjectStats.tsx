@@ -1,16 +1,22 @@
 import React from 'react'
-import { PROJECT_STATS_DATA } from '@/shared/data'
+
 import { ProjectStatCard } from '@/components/screens/dashboard'
 
+import type { TGetProjectStatsResponse } from '@/shared/types/statistics.types'
+
 interface IProjectStatsProps {
-	title?: string
+	projectStats: TGetProjectStatsResponse
 }
 
-export const ProjectStats: React.FC<IProjectStatsProps> = () => {
+export const ProjectStats: React.FC<IProjectStatsProps> = ({ projectStats }) => {
 	return (
-		<div className='space-y-4 w-[35%]'>
-			{PROJECT_STATS_DATA.map(projectStat => (
-				<ProjectStatCard key={projectStat.id} projectStat={projectStat} />
+		<div className='w-[35%] space-y-4'>
+			{projectStats.map((projectStat, index) => (
+				<ProjectStatCard
+					key={projectStat.id}
+					projectStat={projectStat}
+					isLast={index === projectStats.length - 1}
+				/>
 			))}
 		</div>
 	)

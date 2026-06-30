@@ -1,27 +1,35 @@
 'use client'
 
-import React, { useState } from 'react'
+import { getClientProjectChartData } from '@/services/statistics/chart/project-chart-client.service'
 import type { ITimeRange } from '@/shared/types'
-import { ProjectChartsHeader } from '@/components/screens/dashboard/project-charts/ProjectChartsHeader'
+import { useQuery } from '@tanstack/react-query'
+import React, { useState } from 'react'
+
 import { ChartComponent } from '@/components/screens/dashboard/project-charts/ChartComponent'
-import { MONTHLY_DATA, YEARLY_DATA } from '@/shared/data'
+import { ProjectChartsHeader } from '@/components/screens/dashboard/project-charts/ProjectChartsHeader'
+
+import type { TClientProjectChartDataResponse } from '@/shared/types/statistics.types'
 
 interface IProjectChartsProps {
-	title?: string
+	projectChartData: TClientProjectChartDataResponse
 }
 
-export const ProjectCharts: React.FC<IProjectChartsProps> = () => {
+export const ProjectCharts: React.FC<IProjectChartsProps> = ({ projectChartData }) => {
 	const [selectedRange, setSelectedRange] = useState<ITimeRange>({
 		label: 'Yearly',
 		value: 'yearly'
 	})
 
-	const chartData = selectedRange.value === 'yearly' ? YEARLY_DATA : MONTHLY_DATA
+	const { data } = useQuery({
+		queryKey: ['project-charts', selectedRange],
+		queryFn: () => getClientProjectChartData(selectedRange.value),
+		initialData: projectChartData
+	})
 
 	return (
-		<div className='flex flex-col h-full w-full mb-6 bg-block p-5 rounded-2xl flex-1'>
+		<div className='bg-block mb-6 flex h-full w-full flex-1 flex-col rounded-2xl p-5'>
 			<ProjectChartsHeader range={selectedRange} onChangeRange={setSelectedRange} />
-			<ChartComponent data={chartData} />
+			<ChartComponent data={data || []} />
 		</div>
 	)
 }
