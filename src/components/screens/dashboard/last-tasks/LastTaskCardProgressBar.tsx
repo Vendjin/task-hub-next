@@ -1,4 +1,4 @@
-import { getTaskProgressService } from '@/services'
+import { getTaskProgress } from '@/services/tasks'
 import cn from 'clsx'
 import { CircleCheck } from 'lucide-react'
 import React from 'react'
@@ -10,7 +10,7 @@ interface ILastTaskProgressBarProps {
 }
 
 export const LastTaskCardProgressBar: React.FC<ILastTaskProgressBarProps> = ({ subTasks }) => {
-	const progress = getTaskProgressService(subTasks)
+	const progress = getTaskProgress(subTasks)
 
 	const getColor = (value: number) => {
 		if (value === 100) return 'bg-teal-400 dark:bg-teal-400/80'

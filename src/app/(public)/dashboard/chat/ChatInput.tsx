@@ -18,6 +18,7 @@ const ChatInput: FC<IChatInputProps> = ({ sendMessage }) => {
 				value={text}
 				onChange={e => setText(e.target.value)}
 				placeholder='Type your message...'
+				aria-label='Type your message'
 				className='w-full flex-1 bg-transparent p-2 px-3 py-2 text-white focus:outline-none'
 			/>
 			<button

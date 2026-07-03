@@ -1,6 +1,7 @@
+import type { IChartDataPoint } from '@/shared/types'
 import React, { useMemo } from 'react'
 import { Area, AreaChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import type { IChartDataPoint } from '@/shared/types'
+
 import { ProjectChartTooltip } from '@/components/screens/dashboard/project-charts/ProjectChartTooltip'
 
 interface IChartComponentProps {
@@ -25,7 +26,7 @@ export const ChartComponent: React.FC<IChartComponentProps> = ({ data }) => {
 	}, [data])
 
 	return (
-		<ResponsiveContainer width='100%' height={285}>
+		<ResponsiveContainer width='100%' height={285} aria-label='Project chart'>
 			<AreaChart data={data} margin={{ right: 10, left: -30, bottom: -10 }}>
 				<defs>
 					<linearGradient id='colorGradient' x1='0%' y1='0%' x2='0' y2='1'>

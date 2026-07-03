@@ -6,3 +6,5 @@ export {
 	createClientSubTask,
 	taskClientCreate
 } from './task-client.service'
+
+export { getTaskProgress } from './getTaskProgress.service'

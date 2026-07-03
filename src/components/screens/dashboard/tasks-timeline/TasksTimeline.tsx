@@ -48,9 +48,7 @@ export const TasksTimeline: React.FC<ITasksTimelineProps> = ({ tasks }) => {
 				<div className='relative h-72'>
 					<div
 						className='bg-primary/50 absolute top-2 bottom-0 w-0.5'
-						style={{
-							left: currentTimeLinePercent + '%'
-						}}
+						style={{ left: currentTimeLinePercent + '%' }}
 					/>
 
 					{tasks?.map(task => {

@@ -39,13 +39,13 @@ export const SideBarProfile: React.FC<ISideBarAccountProps> = ({ data }) => {
 				{data.avatar_path ? (
 					<Image
 						src={data.avatar_path}
-						alt={data.name || 'avatar'}
+						alt={`${data.name || 'User'} avatar`}
 						width={40}
 						height={40}
 						className='rounded-full'
 					/>
 				) : (
-					<div className='h-10 w-10 shrink-0 rounded-full bg-[#806DF0]' />
+					<div className='h-10 w-10 shrink-0 rounded-full bg-[#806DF0]' aria-hidden='true' />
 				)}
 				<div className='flex min-w-0 flex-col'>
 					<span className='truncate font-medium'>{data.name}</span>
@@ -60,8 +60,8 @@ export const SideBarProfile: React.FC<ISideBarAccountProps> = ({ data }) => {
 				<DropdownMenuContent className='mt-4 ml-4 w-56 rounded-2xl' align='end'>
 					<DropdownMenuLabel>My Account</DropdownMenuLabel>
 					<DropdownMenuGroup>
-						<DropdownMenuItem onClick={signOut}>
-							LogOut
+						<DropdownMenuItem onClick={signOut} aria-label='Log out'>
+							Log Out
 							<DropdownMenuShortcut>
 								<LogOut />
 							</DropdownMenuShortcut>

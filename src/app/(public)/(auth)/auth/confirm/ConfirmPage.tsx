@@ -28,7 +28,7 @@ export default function ConfirmPage() {
 			router.replace(DASHBOARD_PAGES.DASHBOARD)
 		}
 
-		verifyToken()
+		void verifyToken()
 	}, [router, params])
 
 	return <p>Verifying your email... Please wait.</p>
