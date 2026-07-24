@@ -1,14 +1,13 @@
 'use client'
 
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components'
 import { getClientTasks } from '@/services/tasks/task-client.service'
 import { useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
 
-import { LastTaskCard } from '@/components/screens/dashboard/last-tasks/LastTaskCard'
+import { TaskList } from '@/components/elements'
+import { AddTaskModal } from '@/components/modals'
 import { LastTaskFilter } from '@/components/screens/dashboard/last-tasks/LastTaskFilter'
 import { LastTasksSort } from '@/components/screens/dashboard/last-tasks/LastTasksSort'
-import { SkeletonLoader } from '@/components/ui/SkeletonLoader'
 
 import type { TGetTasksResponse, TTaskSortBy, TTaskStatus } from '@/shared/types/task.types'
 
@@ -21,7 +20,7 @@ export const LastTasks: React.FC<ILastTasksProps> = ({ tasks }) => {
 	const [status, setStatus] = useState<TTaskStatus | undefined>(undefined)
 	const [sort, setSort] = useState<TTaskSortBy>('asc')
 
-	const { data, isPending } = useQuery({
+	const { data, isPending, refetch } = useQuery({
 		queryKey: ['last-tasks', status, sort],
 		queryFn: () => getClientTasks({ status, sortByDueDate: sort }),
 		placeholderData: tasks
@@ -42,36 +41,11 @@ export const LastTasks: React.FC<ILastTasksProps> = ({ tasks }) => {
 				<div className='flex items-center gap-2'>
 					<LastTaskFilter status={status} setStatus={setStatus} />
 					<LastTasksSort sort={sort} setSort={setSort} />
+					<AddTaskModal onSuccess={() => refetch()} />
 				</div>
 			</div>
 
-			{isPending ? (
-				<div className='grid grid-cols-3 gap-4'>
-					<SkeletonLoader count={3} />
-				</div>
-			) : countTasks ? (
-				<Carousel
-					opts={{
-						align: 'start',
-						slidesToScroll: 1
-					}}
-					className='relative w-full'
-				>
-					<CarouselContent>
-						{data?.map(taskCard => (
-							<CarouselItem key={taskCard.id} className='basis-1/3'>
-								<LastTaskCard taskCard={taskCard} />
-							</CarouselItem>
-						))}
-					</CarouselContent>
-
-					<CarouselPrevious className='bg-block/60 hover:bg-block absolute top-1/2 left-1 z-10 -translate-y-1/2 rounded-full shadow-md backdrop-blur-xs transition hover:scale-105 dark:backdrop-blur-md' />
-
-					<CarouselNext className='bg-block/40 hover:bg-block absolute top-1/2 right-1 z-10 -translate-y-1/2 rounded-full shadow-md backdrop-blur-xs transition hover:scale-105 dark:backdrop-blur-md' />
-				</Carousel>
-			) : (
-				<div className='flex justify-center text-2xl font-bold text-neutral-400'>Not available tasks</div>
-			)}
+			<TaskList isPending={isPending} tasks={data} countTasks={countTasks} />
 		</div>
 	)
 }

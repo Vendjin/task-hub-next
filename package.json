@@ -62,5 +62,11 @@
 		"tailwindcss": "^4.1.12",
 		"tw-animate-css": "^1.3.7",
 		"typescript": "^5"
+	},
+	"tailwind": {
+		"safelist": [
+			"если нет цветов в теме, что-бы TW их отображал",
+			"bg-violet-500"
+		]
 	}
 }

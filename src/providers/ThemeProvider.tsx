@@ -1,7 +1,7 @@
 'use client'
 
-import React, { type PropsWithChildren } from 'react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import React, { type PropsWithChildren } from 'react'
 
 export function ThemeProvider({ children }: PropsWithChildren) {
 	return (

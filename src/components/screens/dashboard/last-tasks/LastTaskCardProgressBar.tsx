@@ -20,7 +20,12 @@ export const LastTaskCardProgressBar: React.FC<ILastTaskProgressBarProps> = ({ s
 	}
 
 	return (
-		<div className='h-10 w-full rounded-full bg-violet-100 dark:bg-violet-200/90'>
+		<div className='relative h-10 w-full rounded-full bg-violet-100 dark:bg-violet-200/90'>
+			{progress === 0 && (
+				<span className='absolute inset-0 flex items-center justify-center font-semibold text-neutral-600 dark:text-neutral-400'>
+					Not Started
+				</span>
+			)}
 			<div
 				className={cn(
 					'striped-bg animate-stripes relative h-full cursor-default rounded-full transition-all duration-300',
@@ -28,15 +33,17 @@ export const LastTaskCardProgressBar: React.FC<ILastTaskProgressBarProps> = ({ s
 				)}
 				style={{ width: `${progress}%` }}
 			>
-				<span className='absolute inset-0 flex items-center justify-center font-semibold text-neutral-200'>
-					{progress === 100 ? (
-						<span className='flex items-center justify-center gap-2'>
-							<CircleCheck /> Done
-						</span>
-					) : progress === 0 ? null : (
-						<span>{`${progress}%`}</span>
-					)}
-				</span>
+				{progress > 0 && (
+					<span className='absolute inset-0 flex items-center justify-center font-semibold text-neutral-200'>
+						{progress === 100 ? (
+							<span className='flex items-center justify-center gap-2'>
+								<CircleCheck /> Done
+							</span>
+						) : (
+							<span>{`${progress}%`}</span>
+						)}
+					</span>
+				)}
 			</div>
 		</div>
 	)

@@ -35,6 +35,7 @@ export const AddSubTaskModal: React.FC<IAddSubTaskModalProps> = ({ taskId }) => 
 
 	return (
 		<Dialog open={Boolean(taskData)} onOpenChange={() => router.back()}>
+			{/*<DialogTrigger asChild/ >*/}
 			<DialogContent className='w-[1060px] max-w-[1060px] p-4 dark:bg-[#404040]'>
 				<DialogTitle className='flex justify-center pt-1'>Add Subtask for: {taskData.title}</DialogTitle>
 				<SubTaskCreateForm taskId={taskId} />

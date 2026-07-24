@@ -2,7 +2,6 @@
 
 import { createSupabaseClient } from '@/utils/supabase'
 
-
 export async function getProfile() {
 	const client = createSupabaseClient()
 

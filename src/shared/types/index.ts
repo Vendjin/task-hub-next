@@ -1,6 +1,6 @@
-export type { IProfile } from './profile.types'
+export type { IProfile, TProfile } from './profile.types'
 export type { IMenuItem } from './menu.types'
-export type { IProject } from './projects.types'
+export type { IProject, TProjectWithSlug, TProjects } from './projects.types'
 export type { IProjectStat } from './project-stat.types'
 export type { IChartDataPoint, ITimeRange } from './project-chart.types'
 export type { ITaskCard, TProgressFilter, TSortedTasks, ITaskIcon, IAssignee, ISubtask } from './last-tasks.types'

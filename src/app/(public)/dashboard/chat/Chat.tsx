@@ -22,7 +22,7 @@ export const Chat: React.FC<IChatProps> = ({ userId }) => {
 		<div className='flex h-screen flex-col'>
 			<Image
 				alt='chat'
-				src='/ChatGPTback.png'
+				src='/images/ChatGPTback.png'
 				width={400}
 				height={400}
 				className='chat-header-image w-full flex-shrink-0'

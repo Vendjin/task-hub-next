@@ -1,7 +1,7 @@
 'use client'
 
-import { getServerProfile } from '@/services/profile'
-import { MENU, PROJECTS } from '@/shared/data'
+import { MENU } from '@/shared/data'
+import type { TProfile, TProjects } from '@/shared/types'
 import React from 'react'
 
 import { SideBarDivider } from '@/components/ui/sidebar-menu/SideBarDivider'
@@ -10,20 +10,20 @@ import { SideBarProfile } from '@/components/ui/sidebar-menu/SideBarProfile'
 import { SideBarProjects } from '@/components/ui/sidebar-menu/SideBarProjects'
 
 interface ISidebarProps {
-	title?: string
-	data: Awaited<ReturnType<typeof getServerProfile>>
+	profile: TProfile
+	projects: TProjects
 }
 
-export const Sidebar: React.FC<ISidebarProps> = ({ data }) => {
+export const Sidebar: React.FC<ISidebarProps> = ({ profile, projects }) => {
 	return (
 		<aside className='bg-block w-full p-4 pt-10 dark:bg-neutral-800'>
 			<SideBarDivider title='Account' />
-			<SideBarProfile data={data} />
+			<SideBarProfile profile={profile} />
 
 			<SideBarDivider title='Main Menu' />
 			<SideBarMainMenu menu={MENU} />
 			<SideBarDivider title='Projects' />
-			<SideBarProjects projects={PROJECTS} />
+			<SideBarProjects projects={projects} />
 		</aside>
 	)
 }

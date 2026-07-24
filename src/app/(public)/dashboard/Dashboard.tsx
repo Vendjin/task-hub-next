@@ -7,7 +7,7 @@ import { Chat } from '@/app/(public)/dashboard/chat/Chat'
 
 import { ProjectCharts, ProjectStats, TasksTimeline } from '@/components/screens/dashboard'
 import { LastTasks } from '@/components/screens/dashboard/last-tasks'
-import { HeadingDashboard } from '@/components/ui'
+import { Heading } from '@/components/ui'
 
 import type { TGetProjectStatsResponse, TGetServerProjectChartDataResponse } from '@/shared/types/statistics.types'
 import type { TGetTasksResponse, TGetTodayTasksResponse } from '@/shared/types/task.types'
@@ -25,7 +25,7 @@ export const Dashboard: React.FC<IDashboardProps> = ({ tasks, todayTasks, userId
 		<div className='grid h-screen grid-cols-[3.2fr_1fr]'>
 			<div className='overflow-y-auto p-5'>
 				<div className='mb-6 flex items-center justify-between'>
-					<HeadingDashboard />
+					<Heading title='Dashboard' />
 				</div>
 
 				<div className='flex gap-6'>

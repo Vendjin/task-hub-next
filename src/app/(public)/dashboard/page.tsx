@@ -1,8 +1,7 @@
-import { getServiceTasks } from '@/services'
 import { getServerProfile } from '@/services/profile'
 import { getServerProjectChartData } from '@/services/statistics/chart/project-chart-server.service'
 import { getServerProjectStats } from '@/services/statistics/project-stat-server.service'
-import { getTodayTasks } from '@/services/tasks'
+import { getServiceTasks, getTodayTasks } from '@/services/tasks'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 

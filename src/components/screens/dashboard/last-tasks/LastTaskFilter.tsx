@@ -14,7 +14,7 @@ interface ILastTaskFilterProps {
 export const LastTaskFilter: React.FC<ILastTaskFilterProps> = ({ status, setStatus }) => {
 	return (
 		<Select value={status} onValueChange={val => setStatus(val as TTaskStatus)}>
-			<SelectTrigger className='bg-block w-[185px]'>
+			<SelectTrigger className='bg-block w-[185px] cursor-pointer'>
 				<SelectValue placeholder='Filter for Progress' />
 			</SelectTrigger>
 			<SelectContent>

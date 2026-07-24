@@ -8,18 +8,19 @@ import { SearchBar } from '@/components/ui'
 
 interface IHeadingDashboardProps {
 	children?: ReactNode
+	title: string
 }
 
 const DynamicThemeToggle = dynamic(() => import('../theme-toggle/ThemeToggle').then(mod => mod.ThemeToggle), {
 	ssr: false
 })
 
-export const HeadingDashboard: React.FC<IHeadingDashboardProps> = () => {
+export const Heading: React.FC<IHeadingDashboardProps> = ({ title }) => {
 	const [searchValue, setSearchValue] = useState('')
 
 	return (
 		<div className='flex w-full items-center justify-between'>
-			<h1 className='text-2xl font-medium'>Dashboard</h1>
+			<h1 className='text-2xl font-medium'>{title}</h1>
 
 			<div className='flex max-w-sm flex-1 items-center justify-between gap-2'>
 				<SearchBar value={searchValue} onChange={setSearchValue} />

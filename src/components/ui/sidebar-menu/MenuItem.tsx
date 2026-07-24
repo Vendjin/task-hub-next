@@ -1,7 +1,7 @@
-import React from 'react'
 import type { IMenuItem } from '@/shared/types'
-import Link from 'next/link'
 import cn from 'clsx'
+import Link from 'next/link'
+import React from 'react'
 
 interface IMenuItemProps {
 	menuItem: IMenuItem
@@ -13,7 +13,7 @@ export const MenuItem: React.FC<IMenuItemProps> = ({ menuItem }) => {
 			<Link
 				href={menuItem.href}
 				className={cn(
-					'text-neutral-500 flex items-center gap-2 hover:text-neutral-900 transition-colors py-3 px-4 justify-between rounded-full dark:text-neutral-200 dark:hover:text-white',
+					'flex items-center justify-between gap-2 rounded-full px-4 py-3 text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-200 dark:hover:text-white',
 					menuItem.label === 'Dashboard' && 'bg-[var(--color-primary-active)] text-white'
 				)}
 			>
@@ -23,7 +23,7 @@ export const MenuItem: React.FC<IMenuItemProps> = ({ menuItem }) => {
 				</div>
 				<div>
 					{menuItem.label === 'Message' && (
-						<span className='text-primary-active bg-purple-200 rounded-full px-2 text-xs font-medium'>
+						<span className='text-primary-active rounded-full bg-purple-200 px-2 text-xs font-medium'>
 							4
 						</span>
 					)}

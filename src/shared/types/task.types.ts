@@ -1,5 +1,4 @@
-import { getServiceTasks } from '@/services'
-import { getTodayTasks } from '@/services/tasks'
+import { getServiceTasks, getTodayTasks } from '@/services/tasks'
 
 import type { Database } from '@/shared/types/db.types'
 

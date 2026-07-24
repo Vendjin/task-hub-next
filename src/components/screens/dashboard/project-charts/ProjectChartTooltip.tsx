@@ -8,5 +8,5 @@ interface IProjectChartTooltipProps {
 export const ProjectChartTooltip: React.FC<IProjectChartTooltipProps> = ({ active, payload }) => {
 	if (!active || !payload?.length) return null
 
-	return <div className='bg-primary-active py-1 px-2.5 rounded-full'>{payload[0].value} Projects</div>
+	return <div className='bg-primary-active rounded-full px-2.5 py-1'>{payload[0].value} Projects</div>
 }

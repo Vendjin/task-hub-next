@@ -9,5 +9,7 @@ export const DASHBOARD_PAGES = {
 	TEAM: `${BASEURL}/team`,
 	SCHEDULE: `${BASEURL}/schedule`,
 	REPORT: `${BASEURL}/report`,
-	SETTINGS: `${BASEURL}/settings`
+	SETTINGS: `${BASEURL}/settings`,
+
+	PROJECT_DETAILS: (slug: string) => `${BASEURL}/projects/${slug}`
 }

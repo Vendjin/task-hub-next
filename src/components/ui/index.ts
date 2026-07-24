@@ -1,6 +1,6 @@
-export { HeadingDashboard } from '@/components/ui/heading-dashboard/HeadingDashboard'
+export { Heading } from '@/components/ui/heading/Heading'
 export { Sidebar } from './sidebar-menu/Sidebar'
-export { SearchBar } from './heading-dashboard/SearchBar'
+export { SearchBar } from '@/components/ui/heading/SearchBar'
 export { ThemeToggle } from './theme-toggle/ThemeToggle'
 export * from './Select'
 export { Spinner } from './Spinner'

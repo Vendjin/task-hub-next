@@ -29,7 +29,7 @@ export const TitleInputSubtask: React.FC<ITitleInputProps> = () => {
 				<FormItem>
 					<FormLabel className='text-muted-foreground'>Title</FormLabel>
 					<FormControl>
-						<Input placeholder='Enter task title' {...field} />
+						<Input placeholder='Enter task title' {...field} aria-label='title' />
 					</FormControl>
 					<FormMessage />
 				</FormItem>

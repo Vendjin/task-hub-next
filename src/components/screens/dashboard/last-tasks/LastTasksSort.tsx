@@ -14,7 +14,7 @@ export const LastTasksSort: React.FC<ILastTasksSortProps> = ({ sort, setSort }) 
 			<button
 				onClick={() => setSort(sort === 'asc' ? 'desc' : 'asc')}
 				aria-label='Сортировка по дедлайну'
-				className='hover:text-primary-active text-xl text-neutral-400'
+				className='hover:text-primary-active c cursor-pointer text-xl text-neutral-400'
 				type='button'
 			>
 				{sort === 'asc' && <ArrowUp10 />}

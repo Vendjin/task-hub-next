@@ -12,7 +12,10 @@ const font = Poppins({
 
 export const metadata: Metadata = {
 	title: 'Task Hub',
-	description: 'Task Management UI'
+	description: 'Task Management UI',
+	icons: {
+		icon: '/favicon.ico'
+	}
 }
 
 export default function RootLayout({

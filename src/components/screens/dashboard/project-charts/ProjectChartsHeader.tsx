@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { TIME_RANGES } from '@/shared/data'
 import type { ITimeRange } from '@/shared/types'
 import { ChevronDown } from 'lucide-react'
-import { TIME_RANGES } from '@/shared/data'
+import React, { useState } from 'react'
 
 interface IProjectChartsHeaderProps {
 	range: ITimeRange
@@ -17,24 +17,24 @@ export const ProjectChartsHeader: React.FC<IProjectChartsHeaderProps> = ({ range
 	}
 
 	return (
-		<div className='flex items-center justify-between mb-2'>
-			<h2 className='text-2xl font-medium '>Projects Statistic</h2>
+		<div className='mb-2 flex items-center justify-between'>
+			<h2 className='text-2xl font-medium'>Projects Statistic</h2>
 			<div className='relative'>
 				<button
 					onClick={() => setIsOpenDropdown(!isOpenDropdown)}
-					className='flex items-center justify-center gap-2 w-full border border-block rounded-2xl px-3 py-1 '
+					className='border-block flex w-full items-center justify-center gap-2 rounded-2xl border px-3 py-1'
 				>
 					{range.label}
-					<ChevronDown size={18} className='cursor-pointer hover:text-primary-active' />
+					<ChevronDown size={18} className='hover:text-primary-active cursor-pointer' />
 				</button>
 
 				{isOpenDropdown && (
-					<div className='absolute right-0 mt-1.5  border border-block rounded-2xl px-3 py-1 z-10'>
+					<div className='border-block absolute right-0 z-10 mt-1.5 rounded-2xl border px-3 py-1'>
 						{TIME_RANGES.map(range => (
 							<button
 								key={range.label}
 								onClick={() => handleChangeRange(range)}
-								className='w-full px-3 py-2 text-sm text-left transition-colors hover:text-primary-active'
+								className='hover:text-primary-active w-full px-3 py-2 text-left text-sm transition-colors'
 							>
 								{range.label}
 							</button>

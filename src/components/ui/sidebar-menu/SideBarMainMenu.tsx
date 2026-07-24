@@ -1,6 +1,7 @@
-import React from 'react'
-import { MenuItem } from '@/components/ui/sidebar-menu/MenuItem'
 import type { IMenuItem } from '@/shared/types'
+import React from 'react'
+
+import { MenuItem } from '@/components/ui/sidebar-menu/MenuItem'
 
 interface ISideBarMainProps {
 	menu: IMenuItem[]
