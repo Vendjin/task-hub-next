@@ -1,7 +1,7 @@
 // import type { TProgressFilter, TSortedTasks } from '@/shared/types'
 // import React from 'react'
 //
-// import { LastTaskFilter } from '@/components/screens/dashboard/last-tasks/LastTaskFilter'
+// import { LastTaskFilterStatus } from '@/components/screens/dashboard/last-tasks/LastTaskFilterStatus'
 // import { LastTasksSort } from '@/components/screens/dashboard/last-tasks/LastTasksSort'
 //
 // interface ILastTasksTitleProps {
@@ -31,7 +31,7 @@
 // 			</div>
 //
 // 			<div className='flex items-center gap-2'>
-// 				<LastTaskFilter value={valueFilter} onChange={onChangeFilter} counters={counters} />
+// 				<LastTaskFilterStatus value={valueFilter} onChange={onChangeFilter} counters={counters} />
 // 				<LastTasksSort order={sort} toggleOrder={toggleSort} />
 // 			</div>
 // 		</div>

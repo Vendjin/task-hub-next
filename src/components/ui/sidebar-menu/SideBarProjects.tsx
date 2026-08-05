@@ -17,10 +17,17 @@ export const SideBarProjects: React.FC<ISideBarProjectsProps> = ({ projects }) =
 				<Link
 					href={DASHBOARD_PAGES.PROJECT_DETAILS(project.slug)}
 					key={project.name}
-					className='flex cursor-pointer items-center gap-3'
+					className='group flex cursor-pointer items-center gap-3'
 				>
-					<div className={cn(project.color, 'h-4 w-4')} />
-					<span className='text-neutral-500 dark:text-neutral-200'>{project.name}</span>
+					<div
+						className={cn(
+							project.color,
+							'h-4 w-4 transition-all duration-500 ease-in-out group-hover:rounded-xl'
+						)}
+					/>
+					<span className='text-neutral-500 group-hover:text-neutral-900 dark:text-neutral-200 dark:group-hover:text-white'>
+						{project.name}
+					</span>
 				</Link>
 			))}
 		</ul>

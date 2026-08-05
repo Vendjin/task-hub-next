@@ -22,5 +22,5 @@ export default async function Page({ params }: { params: Promise<TParams> }) {
 		return <div className='p-5'>Project not found</div>
 	}
 
-	return <ProjectDetails project={project.data}></ProjectDetails>
+	return <ProjectDetails project={project.data} />
 }

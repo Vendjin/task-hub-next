@@ -14,7 +14,7 @@ interface ITaskListProps {
 export const TaskList: FC<ITaskListProps> = ({ tasks, isPending, countTasks }) => {
 	return isPending ? (
 		<div className='grid grid-cols-3 gap-4'>
-			<SkeletonLoader count={3} />
+			<SkeletonLoader count={3} className='bg-block h-[120px]' />
 		</div>
 	) : countTasks ? (
 		<Carousel

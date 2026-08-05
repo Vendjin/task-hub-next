@@ -77,7 +77,15 @@ function filterTasks(tasks: TTask[], status: TTaskStatus) {
 	})
 }
 
-export async function getClientTasks({ status, sortByDueDate }: { status?: TTaskStatus; sortByDueDate?: TTaskSortBy }) {
+export async function getClientTasks({
+	status,
+	sortByDueDate,
+	projectId
+}: {
+	status?: TTaskStatus
+	sortByDueDate?: TTaskSortBy
+	projectId: string | null
+}) {
 	const client = createSupabaseClient()
 
 	let query = client.from('task').select('*, sub_task(*), task_participants(profile(*))')
@@ -86,6 +94,10 @@ export async function getClientTasks({ status, sortByDueDate }: { status?: TTask
 		query = query.order('due_date', {
 			ascending: sortByDueDate === 'asc'
 		})
+	}
+
+	if (projectId) {
+		query = query.eq('project_id', projectId)
 	}
 
 	const { data, error } = await query

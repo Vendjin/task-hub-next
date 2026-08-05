@@ -35,5 +35,6 @@ export const TaskSchema = z.object({
 	dueDate: z.date().min(new Date().setHours(0, 0, 0, 0), 'Due date must be today or in the future'),
 	icon: z.enum(ICON_NAMES, {
 		message: 'Invalid icon selected'
-	})
+	}),
+	project_id: z.string().optional()
 })

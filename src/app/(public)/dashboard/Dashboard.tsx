@@ -1,5 +1,6 @@
 'use client'
 
+import type { TProjects } from '@/shared/types'
 import { cn } from '@/utils'
 import React from 'react'
 
@@ -18,9 +19,17 @@ interface IDashboardProps {
 	userId: string
 	projectStats: TGetProjectStatsResponse
 	projectChartData: TGetServerProjectChartDataResponse
+	projects: TProjects
 }
 
-export const Dashboard: React.FC<IDashboardProps> = ({ tasks, todayTasks, userId, projectStats, projectChartData }) => {
+export const Dashboard: React.FC<IDashboardProps> = ({
+	tasks,
+	todayTasks,
+	userId,
+	projectStats,
+	projectChartData,
+	projects
+}) => {
 	return (
 		<div className='grid h-screen grid-cols-[3.2fr_1fr]'>
 			<div className='overflow-y-auto p-5'>
@@ -34,7 +43,7 @@ export const Dashboard: React.FC<IDashboardProps> = ({ tasks, todayTasks, userId
 				</div>
 
 				<div className={cn('mb-7 grid gap-6', 'grid-cols-[100%]')}>
-					<LastTasks tasks={tasks} />
+					<LastTasks tasks={tasks} projects={projects} />
 					<TasksTimeline tasks={todayTasks} />
 				</div>
 			</div>

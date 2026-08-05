@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { SelectProject } from '@/components/modals/add-task-modal/fields/SelectProject'
 import { useAddTask } from '@/components/modals/add-task-modal/useAddTask'
 import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/Dialog'
 import { Form } from '@/components/ui/Form'
@@ -31,7 +32,8 @@ export const AddTaskModal: React.FC<IAddTaskModalProps> = ({ onSuccess }) => {
 		defaultValues: {
 			title: '',
 			dueDate: new Date(),
-			icon: undefined
+			icon: undefined,
+			project_id: undefined
 		}
 	})
 
@@ -53,7 +55,8 @@ export const AddTaskModal: React.FC<IAddTaskModalProps> = ({ onSuccess }) => {
 			title: data.title,
 			due_date: data.dueDate.toISOString(),
 			icon: data.icon,
-			owner_id: user.id
+			owner_id: user.id,
+			project_id: data.project_id
 		})
 	}
 
@@ -65,13 +68,13 @@ export const AddTaskModal: React.FC<IAddTaskModalProps> = ({ onSuccess }) => {
 	}
 
 	return (
-		<Dialog open={open} onOpenChange={handleOpenChange}>
+		<Dialog open={open} onOpenChange={handleOpenChange} modal={false}>
 			<DialogTrigger asChild>
 				<Button variant='outline' className='hover:text-primary-active cursor-pointer text-neutral-400'>
 					Add Task
 				</Button>
 			</DialogTrigger>
-			<DialogContent className='sm:max-w-lg'>
+			<DialogContent className='sm:max-w-lg' onPointerDownOutside={e => e.preventDefault()}>
 				<DialogHeader>
 					<DialogTitle>Add New Task</DialogTitle>
 				</DialogHeader>
@@ -80,6 +83,7 @@ export const AddTaskModal: React.FC<IAddTaskModalProps> = ({ onSuccess }) => {
 						<TitleField />
 						<DateField />
 						<IconField />
+						<SelectProject />
 						<SubmitButton loading={isPending} title='Create Task' />
 					</form>
 				</Form>

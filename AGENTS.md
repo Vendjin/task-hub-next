@@ -21,6 +21,7 @@ npm run db:gen       # Generate Supabase types from remote schema
 - **UI**: shadcn/ui (new-york style, neutral base) + Tailwind CSS v4
 - **Package Manager**: Bun (but npm scripts work)
 - **Font**: Poppins (weights 300-900)
+- **Dev server**: Uses Turbopack (flag: `--turbopack`)
 
 ## Path Structure
 
@@ -28,6 +29,8 @@ npm run db:gen       # Generate Supabase types from remote schema
 src/
 ├── app/              # Next.js App Router
 │   ├── (public)/     # Public routes (auth, dashboard, error)
+│   │   ├── (auth)/   # Auth routes (login, register, forgot-password, reset-password)
+│   │   └── dashboard/ # Main dashboard routes
 │   └── admin/        # Admin pages
 ├── components/       # UI components (elements, modals, screens, ui/)
 ├── config/           # Route and page configurations
@@ -47,13 +50,13 @@ Path alias: `@/*` → `./src/*`
 
 - **Types**: Auto-generated from remote schema via `npm run db:gen`
 - **Auth**: SSR middleware in `src/middleware.tsx` protects routes
-    - Unprotected: `/login`, `/auth` paths
+    - Unprotected: `/login`, `/auth/*` paths (must start with `/login` or `/auth`)
     - All other routes require authentication
-- **Server Actions**: Use `createAdminClient()` from `@/utils/supabase`
-- **Client**: Use `createServerClient<Database>` with typed Database
+- **Client**: Use `createSupabaseClient()` from `@/utils/supabase/client`
+- **Server**: Use `createSupabaseServer()` from `@/utils/supabase/server`
+- **Server Actions**: Use `createAdminClient()` from `@/utils/supabase/server` (requires `'use server'`)
 
-**Critical**: Never modify code between `createServerClient()` and `supabase.auth.getUser()` in middleware. Always
-return the `supabaseResponse` object unchanged.
+**Critical**: Never modify code between `createServerClient()` and `supabase.auth.getUser()` in middleware. Always return the `supabaseResponse` object unchanged.
 
 ## Code Style
 
@@ -77,7 +80,7 @@ Mark with `'use server'` directive. Use admin client for mutations:
 ```typescript
 'use server'
 
-import { createAdminClient } from '@/utils/supabase'
+import { createAdminClient } from '@/utils/supabase/server'
 ```
 
 ## Image Configuration
@@ -90,3 +93,9 @@ Only GitHub avatars whitelisted for remote images in `next.config.ts`. Add other
 - Feature components in `src/components/screens/` or `src/components/elements/`
 - Modals in `src/components/modals/`
 - Export from barrel files (`index.ts`) for clean imports
+
+## Route Configuration
+
+Use centralized config files for route constants:
+- `@/config/public-pages.config.ts` - Public route paths (login, register, etc.)
+- `@/config/dashboard-pages.config.ts` - Dashboard route paths (including helper functions)

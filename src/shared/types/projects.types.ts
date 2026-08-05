@@ -6,4 +6,4 @@ export interface IProject {
 }
 
 export type TProjectWithSlug = NonNullable<Awaited<ReturnType<typeof getServerProjectBySlug>>['data']>
-export type TProjects = NonNullable<Awaited<ReturnType<typeof getServerProjects>>>
+export type TProjects = NonNullable<Awaited<ReturnType<typeof getServerProjects>>>['data']

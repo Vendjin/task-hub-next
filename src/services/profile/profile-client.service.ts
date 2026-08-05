@@ -18,3 +18,13 @@ export async function getProfile() {
 
 	return { ...user, ...data }
 }
+
+export async function getAllProfiles() {
+	const client = createSupabaseClient()
+
+	const { data, error } = await client.from('profile').select('*').select('*')
+
+	if (error || !data) throw new Error(error?.message || 'Profiles not found')
+
+	return data
+}

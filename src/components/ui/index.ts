@@ -24,3 +24,12 @@ export {
 	DropdownMenuItem,
 	DropdownMenuShortcut
 } from './DropdownMenu'
+export { Textarea } from './Textarea'
+export {
+	InputGroup,
+	InputGroupButton,
+	InputGroupTextarea,
+	InputGroupText,
+	InputGroupInput,
+	InputGroupAddon
+} from './Input-group'
