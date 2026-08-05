@@ -3,7 +3,7 @@
 import { createSupabaseClient } from '@/utils/supabase'
 
 import type { Database } from '@/shared/types/db.types'
-import type { TTask, TTaskSortBy, TTaskStatus } from '@/shared/types/task.types'
+import type { ICreateTaskService, TTask, TTaskSortBy, TTaskStatus } from '@/shared/types/task.types'
 
 export async function taskClientGetById(id: string) {
 	const client = createSupabaseClient()
@@ -25,12 +25,23 @@ export async function taskClientUpdate(id: string, task: Database['public']['Tab
 	return data
 }
 
-export async function taskClientCreate(task: Database['public']['Tables']['task']['Insert']) {
+export async function taskClientCreate({ task, participants = [] }: ICreateTaskService) {
 	const client = createSupabaseClient()
 
 	const { data, error } = await client.from('task').insert(task).select(`*, sub_task(*)`).single()
 
 	if (error || !data) throw new Error(error.message || 'Failed to create task')
+
+	if (participants.length > 0) {
+		const { error: participantsError } = await client.from('task_participants').insert(
+			participants.map(profile_id => ({
+				task_id: data.id,
+				profile_id
+			}))
+		)
+
+		if (participantsError) throw new Error(participantsError.message || 'Failed to create task')
+	}
 
 	return data
 }

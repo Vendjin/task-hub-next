@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { SelectParticipants } from '@/components/modals/add-task-modal/fields/SelectPartisipants'
 import { SelectProject } from '@/components/modals/add-task-modal/fields/SelectProject'
 import { useAddTask } from '@/components/modals/add-task-modal/useAddTask'
 import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/Dialog'
@@ -52,11 +53,14 @@ export const AddTaskModal: React.FC<IAddTaskModalProps> = ({ onSuccess }) => {
 		}
 
 		mutate({
-			title: data.title,
-			due_date: data.dueDate.toISOString(),
-			icon: data.icon,
-			owner_id: user.id,
-			project_id: data.project_id
+			task: {
+				title: data.title,
+				due_date: data.dueDate.toISOString(),
+				icon: data.icon,
+				owner_id: user.id,
+				project_id: data.project_id
+			},
+			participants: data.participants || []
 		})
 	}
 
@@ -81,6 +85,7 @@ export const AddTaskModal: React.FC<IAddTaskModalProps> = ({ onSuccess }) => {
 				<Form {...methods}>
 					<form onSubmit={methods.handleSubmit(onSubmit)} className='space-y-4'>
 						<TitleField />
+						<SelectParticipants />
 						<DateField />
 						<IconField />
 						<SelectProject />

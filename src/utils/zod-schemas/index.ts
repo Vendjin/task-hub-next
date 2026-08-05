@@ -1,1 +1,1 @@
-export { TaskSchema } from './task.zod'
+export { default as TaskSchema } from './task.zod'

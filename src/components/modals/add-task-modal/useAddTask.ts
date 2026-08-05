@@ -1,13 +1,12 @@
 import { taskClientCreate } from '@/services/tasks'
+import type { ICreateTaskService } from '@/shared/types'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
-
-import type { Database } from '@/shared/types/db.types'
 
 export function useAddTask({ closeModal }: { closeModal: () => void }) {
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['task', 'create'],
-		mutationFn: (data: Database['public']['Tables']['task']['Insert']) => taskClientCreate(data),
+		mutationFn: (data: ICreateTaskService) => taskClientCreate(data),
 		onSuccess: () => {
 			toast.success('Task created successfully', {
 				id: 'task-created-success'

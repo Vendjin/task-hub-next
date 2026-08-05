@@ -19,3 +19,8 @@ export type TSubTaskFormData = Database['public']['Tables']['sub_task']['Insert'
 
 type TParticipant = TGetTodayTasksResponse[number]['task_participants'][number]
 export type TUserProfile = NonNullable<TParticipant['profile']>
+
+export interface ICreateTaskService {
+	task: Database['public']['Tables']['task']['Insert']
+	participants?: string[]
+}

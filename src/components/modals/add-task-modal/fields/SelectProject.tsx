@@ -5,6 +5,7 @@ import { getClientProjects } from '@/services/projects/project-client.service'
 import { cn } from '@/utils'
 import { useQuery } from '@tanstack/react-query'
 import { Check, ChevronsUpDown } from 'lucide-react'
+import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/Form'
@@ -13,6 +14,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 
 export function SelectProject() {
 	const { control } = useFormContext()
+	const [open, setOpen] = useState(false)
 
 	const { data: projects, isLoading } = useQuery({
 		queryKey: ['projects'],
@@ -32,7 +34,7 @@ export function SelectProject() {
 				<FormItem className='flex flex-col'>
 					<FormLabel>Проект</FormLabel>
 
-					<Popover>
+					<Popover open={open} onOpenChange={setOpen}>
 						<PopoverTrigger asChild>
 							<FormControl>
 								<Button variant='outline' role='combobox' className='justify-between'>
@@ -59,8 +61,11 @@ export function SelectProject() {
 												{projects?.map(project => (
 													<CommandItem
 														key={project.id}
-														value={project.name}
-														onSelect={() => field.onChange(project.id)}
+														value={project.name || ''}
+														onSelect={() => {
+															field.onChange(project.id)
+															setOpen(false)
+														}}
 													>
 														{project.name}
 

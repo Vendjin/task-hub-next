@@ -7,5 +7,5 @@ export type { ITaskCard, TProgressFilter, TSortedTasks, ITaskIcon, IAssignee, IS
 export type { ITaskFormValues } from './task-form.types'
 export type { ISubTaskForm } from './sub-task-form.types'
 export type { IAuthForm } from './auth-form.types'
-export type { TTask, TUserProfile } from './task.types'
+export type { TTask, TUserProfile, ICreateTaskService } from './task.types'
 export type { TChatMessageWithProfile } from './chat.types'
